@@ -40,6 +40,34 @@ class IncrediblyCrudeClock():
 
 
 
+class SettingsList(Screen):
+    _app = ObjectProperty()
+    def on_enter(self):
+        try:
+            MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.tm_id.text = self._app.user_data["tm_id"]
+        except:
+            #MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.tm_id.text = "---"
+            pass
+        
+        try:
+            MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.vk_id.text = self._app.user_data["vk_id"]
+        except:
+            #MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.vk_id.text = "---"
+            pass
+    
+    def save_settings(self):
+        self._app.user_data = ast.literal_eval(self._app.config.get('General', 'user_data'))
+        self._app.user_data["tm_id"] = self.ids.tm_id.text
+        self._app.user_data["vk_id"] = self.ids.vk_id.text
+
+        self._app.config.set('General', 'user_data', self._app.user_data)
+        self._app.config.write()
+
+        print(self._app.user_data)
+        MainApp.get_running_app().screen_manager.current = 'menu'
+
+
+
 
 
 class DishList(Screen):
@@ -103,21 +131,26 @@ class MainApp(MDApp):
     def __init__(self, **kvargs):
         super(MainApp, self).__init__(**kvargs)
         self.config = ConfigParser()
-        self.screen_manager = Factory.ManagerScreens()
         self.user_data = {}
+        self.screen_manager = Factory.ManagerScreens()
+
+    def callback(self):
+        #self.screen_manager.add_widget(SettingsList(name="settings_list"))
+        self.screen_manager.current = "settings_list"
+
 
     def build_config(self, config):
         config.adddefaultsection('General')
         config.setdefault('General', 'user_data', '{}')
 
     def get_value_from_config(self):
-        self.config.read(os.path.join(self.directory, '%(appname)s.ini'))
+        self.config.read(os.path.join(self.directory, 'inppk.ini'))
         self.user_data = ast.literal_eval(self.config.get(
             'General', 'user_data'))
 
     def get_application_config(self):
         return super(MainApp, self).get_application_config(
-            '{}/%(appname)s.ini'.format(self.directory))
+            'inppk.ini'.format(self.directory))
 
     def build(self):
         self.root = Factory.MenuScreen()
