@@ -1,0 +1,218 @@
+<PhotoFoodRec>:
+    name: "photo_food_rec"
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Распознание"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: app.theme_cls.primary_color
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+
+        #Список сьеденного
+        MDFillRoundFlatButton:
+            text: "Выберите подходящие"
+            font_size: 20
+            md_bg_color: rgba("#4575CA")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'dish_list2'
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"recogn1.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Макароны по-флотски"
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 320; Б: 7,2 г. Ж: 17 г. У: 54 г."
+                        font_size: 12
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"recogn2.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Макароны с фаршем"
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 317; Б: 8,2 г. Ж: 21 г. У: 67 г."
+                        font_size: 12
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"recogn3.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Макароны с мясным..."
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 327; Б: 6,2 г. Ж: 31 г. У: 61 г."
+                        font_size: 12
+
+        
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"recogn4.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Макароны 'Чизбургер'"
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 319; Б: 6,7 г. Ж: 38 г. У: 60 г."
+                        font_size: 12        
+        
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"recogn5.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Спагетти с фаршем"
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 289; Б: 9,7 г. Ж: 28 г. У: 70 г."
+                        font_size: 12         
+        
+
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'dish_list'
+            text: "< Дневник питания"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:    
+
+
+
+
+
+

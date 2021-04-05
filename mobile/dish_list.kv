@@ -1,0 +1,292 @@
+<DishList>:
+    name: "dish_list"
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Питание - iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: app.theme_cls.primary_color
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+
+        #Список сьеденного
+        MDFillRoundFlatButton:
+            text: "Последние 3 блюда"
+            font_size: 20
+            md_bg_color: rgba("#4575CA")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"dish1.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Салат овощной с сыром"
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 120; Б: 0,2 г. Ж: 7 г. У: 64 г."
+                        font_size: 12
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"dish2.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Креветки вареные"
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 240; Б: 4,2 г. Ж: 2 г. У: 11 г."
+                        font_size: 12
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"dish5.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Сырный суп"
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 320; Б: 5,2 г. Ж: 12 г. У: 41 г."
+                        font_size: 12
+
+        
+        
+        
+        
+        
+        # -------------------------  Результат    
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Результат за сутки"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#4575CA")
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(50)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#A590CA")
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 5
+
+                MDBoxLayout:
+                    padding: 5
+                    size_hint_x: 0.3
+                MDFillRoundFlatButton:
+                    text: "Белки"
+                    font_size: 20
+                    text_color: rgba("#000000")
+                    size_hint_y: None
+                    height: dp(40)
+                    md_bg_color: rgba("#FFFF00")
+
+                MDBoxLayout:
+                    padding: 5
+                    size_hint_x: 0.3
+                MDFillRoundFlatButton:
+                    text: "Жиры"
+                    font_size: 20
+                    text_color: rgba("#000000")
+                    size_hint_y: None
+                    height: dp(40)
+                    md_bg_color: rgba("#00FFFF")
+
+                MDBoxLayout:
+                    padding: 5
+                    size_hint_x: 0.3
+                MDFillRoundFlatButton:
+                    text: "Углеводы"
+                    font_size: 20
+                    text_color: rgba("#000000")
+                    size_hint_y: None
+                    height: dp(40)
+                    md_bg_color: rgba("#FF00FF")
+
+
+        
+        
+        
+        
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Рекомендуем *"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#4575CA")
+        
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                FitImage:
+                    source:"dish6.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+
+                    Label:
+                        text:"Блины тонкие на молоке"
+                        font_size: 20
+
+                    Label:
+                        text:"Калорий: 151; Б: 10,1 г. Ж: 20 г. У: 41 г."
+                        font_size: 12
+        
+
+
+
+
+
+        MDTextField:
+            hint_text: "Введите блюдо"
+            helper_text: ""
+            helper_text_mode: "on_focus"
+            size_hint_x: 0.9
+            font_size: 20
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            mode: "rectangle"
+
+        
+        MDBoxLayout:
+            orientation: 'horizontal'
+                
+            MDBoxLayout:
+                size_hint_x: 0.3
+            MDFillRoundFlatButton:
+                text: "Добавить"
+                font_size: 20
+                text_color: rgba("#000000")
+                size_hint_y: None
+                pos_hint: {"center_x": .5}
+                height: dp(40)
+
+            MDBoxLayout:
+                size_hint_x: 0.3
+            MDFillRoundFlatButton:
+                on_press: app.screen_manager.current = 'photo_food'
+                text: "Фото"
+                font_size: 20
+                text_color: rgba("#000000")
+                size_hint_y: None
+                pos_hint: {"center_x": .5}
+                height: dp(40)
+
+            MDBoxLayout:
+                size_hint_x: 0.3
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:    
+
+
+
+
+
+

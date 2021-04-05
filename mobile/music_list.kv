@@ -1,0 +1,154 @@
+<MusicList>:
+    name: "music_list"
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: app.theme_cls.primary_color
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+        VideoPlayer:
+            #по умолчанию, меняем по загрузке экрана
+            source: 'videoplayback.mp4'
+            size_hint_y: None
+            height: dp(160)
+
+        #Список результатов
+        MDFillRoundFlatButton:
+            text: "Последние 3 видео"
+            font_size: 20
+            md_bg_color: rgba("#4575CA")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                FitImage:
+                    source:"music1.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+                Label:
+                    text: "Two Steps From Hell \nHeart of Courage"
+                    font_size: 20
+
+            
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                FitImage:
+                    source:"music2.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+                Label:
+                    text: "Portugal. The Man \nFeel It Still"
+                    font_size: 20
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                FitImage:
+                    source:"music4.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+                Label:
+                    text: "Safety Dance \nGlee Cast Version"
+                    font_size: 20
+
+
+
+
+
+
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Рекомендуем *"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#4575CA")
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            pos_hint: {"center_x": .5}
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                FitImage:
+                    source:"music5.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+                Label:
+                    text: "Tears of the Sun \n Danger Close"
+                    font_size: 20
+
+
+
+        MDTextField:
+            hint_text: "Введите ссылку на стрим"
+            helper_text: ""
+            helper_text_mode: "on_focus"
+            size_hint_x: 0.9
+            font_size: 20
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            mode: "rectangle"
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:    

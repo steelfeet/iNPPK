@@ -1,0 +1,162 @@
+<ManagerScreens@ScreenManager>:
+    
+    MenuScreen:
+        id: menu
+    
+    DishList:
+        id: dish_list
+    PhotoFood:
+        id: photo_food
+    PhotoFoodRec:
+        id: photo_food_rec
+    DishList2:
+        id: dish_list2
+
+
+    ActionList:
+        id: action_list
+
+    ReadList:
+        id: read_list
+
+    MusicList:
+        id: music_list
+
+    SleepingMode:
+        id: sleep_mode
+
+    ToDoList:
+        id: todo_list
+
+
+    ResultList:
+        id: result_list
+    AddResult:
+        id: add_result
+
+
+
+
+
+
+
+
+
+
+
+<MenuScreen@Screen>:
+    name: "menu"
+            
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: app.theme_cls.primary_color
+            #font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'dish_list'
+            text: "Дневник питания"
+            font_size: 20
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'action_list'
+            text: "Дневник событий"
+            font_size: 20
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'read_list'
+            text: "Читательский дневник"
+            font_size: 20
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'music_list'
+            text: "Музыкальный Дневник"
+            font_size: 20
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'sleep_mode'
+            text: "Режим Сна"
+            font_size: 20
+            size_hint_x: 1.0
+            md_bg_color: rgba("#2196F3")
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+ 
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'result_list'
+            text: "Результаты"
+            font_size: 20
+            md_bg_color: rgba("#4575CA")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+        Widget:    
+
+
+
+#:include force dish_list.kv
+#:include force photo_food-present.kv
+#:include force photo_food-rec.kv
+#:include force dish_list2.kv
+
+#:include force action_list.kv
+#:include force read_list.kv
+#:include force music_list.kv
+#:include force sleep_mode.kv
+#:include force todo_list.kv
+
+#:include force result_list.kv
+#:include force add_result.kv
+
+
+
+
+
+
+
+
+
+
