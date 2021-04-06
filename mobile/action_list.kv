@@ -1,5 +1,6 @@
 <ActionList>:
     name: "action_list"
+    _app: app
 
     MDBoxLayout:
         # Add padding and spacing
@@ -39,35 +40,40 @@
             pos_hint: {"center_x": .5} 
 
         MDFillRoundFlatButton:
-            text: "20:17 - Катаюсь на велосипеде"
+            id: title_1
+            #text: "20:17 - Катаюсь на велосипеде"
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
 
         MDFillRoundFlatButton:
-            text: "19:00 - Работа по дому"
+            id: title_2
+            #text: "19:00 - Работа по дому"
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
             
         MDFillRoundFlatButton:
-            text: "17:00 - Домашняя работа"
+            id: title_3
+            #text: "17:00 - Домашняя работа"
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
             
         MDFillRoundFlatButton:
-            text: "15:30 - Обед"
+            id: title_4
+            #text: "15:30 - Обед"
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
 
         MDFillRoundFlatButton:
-            text: "08:30 - Уроки"
+            id: title_5
+            #text: "08:30 - Уроки"
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(30)
@@ -78,6 +84,7 @@
 
 
         MDTextField:
+            id: action_text
             hint_text: "Введите название события"
             helper_text: ""
             helper_text_mode: "on_focus"
@@ -96,6 +103,7 @@
             MDBoxLayout:
                 size_hint_x: 0.3
             MDFillRoundFlatButton:
+                on_press: root.add_action()
                 text: "Добавить"
                 font_size: 20
                 text_color: rgba("#000000")
