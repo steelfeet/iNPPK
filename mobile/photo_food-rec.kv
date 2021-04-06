@@ -1,5 +1,7 @@
+#список распознанных рецептов с выбором
 <PhotoFoodRec>:
     name: "photo_food_rec"
+    _app: app
 
     MDBoxLayout:
         # Add padding and spacing
@@ -40,7 +42,10 @@
             pos_hint: {"center_x": .5} 
 
         MDFillRoundFlatButton:
-            on_press: app.screen_manager.current = 'dish_list2'
+            #реальный выбор
+            on_press: root.select_dish(0)
+            #переход на презентационный вариант с макаронами
+            #on_press: app.screen_manager.current = 'dish_list2'
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(60)
@@ -51,7 +56,8 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
+                AsyncImage:
+                    id: rec_im_1
                     source:"recogn1.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
@@ -59,17 +65,18 @@
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
+                        id: title_1
                         text:"Макароны по-флотски"
                         font_size: 20
-
                     Label:
+                        id: data_1
                         text:"Калорий: 320; Б: 7,2 г. Ж: 17 г. У: 54 г."
                         font_size: 12
 
 
         MDFillRoundFlatButton:
+            on_press: root.select_dish(1)
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(60)
@@ -80,7 +87,8 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
+                AsyncImage:
+                    id: rec_im_2
                     source:"recogn2.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
@@ -88,17 +96,18 @@
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
+                        id: title_2
                         text:"Макароны с фаршем"
                         font_size: 20
-
                     Label:
+                        id: data_2
                         text:"Калорий: 317; Б: 8,2 г. Ж: 21 г. У: 67 г."
                         font_size: 12
 
 
         MDFillRoundFlatButton:
+            on_press: root.select_dish(2)
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(60)
@@ -109,7 +118,8 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
+                AsyncImage:
+                    id: rec_im_3
                     source:"recogn3.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
@@ -117,17 +127,18 @@
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
+                        id: title_3
                         text:"Макароны с мясным..."
                         font_size: 20
-
                     Label:
+                        id: data_3
                         text:"Калорий: 327; Б: 6,2 г. Ж: 31 г. У: 61 г."
                         font_size: 12
 
         
         MDFillRoundFlatButton:
+            on_press: root.select_dish(3)
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(60)
@@ -138,7 +149,8 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
+                AsyncImage:
+                    id: rec_im_4
                     source:"recogn4.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
@@ -146,16 +158,17 @@
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
+                        id: title_4
                         text:"Макароны 'Чизбургер'"
                         font_size: 20
-
                     Label:
+                        id: data_4
                         text:"Калорий: 319; Б: 6,7 г. Ж: 38 г. У: 60 г."
                         font_size: 12        
         
         MDFillRoundFlatButton:
+            on_press: root.select_dish(4)
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(60)
@@ -166,7 +179,8 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
+                AsyncImage:
+                    id: rec_im_5
                     source:"recogn5.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
@@ -174,12 +188,12 @@
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
+                        id: title_5
                         text:"Спагетти с фаршем"
                         font_size: 20
-
                     Label:
+                        id: data_5
                         text:"Калорий: 289; Б: 9,7 г. Ж: 28 г. У: 70 г."
                         font_size: 12         
         

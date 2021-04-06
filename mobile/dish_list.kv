@@ -260,7 +260,12 @@
             MDBoxLayout:
                 size_hint_x: 0.3
             MDFillRoundFlatButton:
-                on_press: app.screen_manager.current = 'photo_food'
+                #презентационный вариант, с фотографией
+                #on_press: app.screen_manager.current = 'photo_food-present'
+                #реальный продакт, с камерой
+                #on_press: app.screen_manager.current = 'photo_food'
+                #вариант для видео, с вводом ссылки на картинку
+                on_press: app.screen_manager.current = 'photo_food_s1_imuri'
                 text: "Фото"
                 font_size: 20
                 text_color: rgba("#000000")
