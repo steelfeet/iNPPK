@@ -71,6 +71,39 @@ class SettingsList(Screen):
 
 class DishList(Screen):
     _app = ObjectProperty()
+    def on_enter(self):
+        db_request = {}
+        db_request['code'] = 'last_dish'
+        db_request['action'] = ''
+        db_request['tm_id'] = self._app.user_data["tm_id"]
+        db_request['vk_id'] = self._app.user_data["vk_id"]
+        headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+        }
+        db_json = json.dumps(db_request)
+        page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+        print(page_url)
+        t = requests.get(page_url, headers = headers)
+
+        dishes_list_now = json.loads(t.text)
+
+        dish = dishes_list_now[0]
+        source = str(dish['image_uri']).replace("\\", "")
+        self.ids.image_1.source = source
+        self.ids.title_1.text = dish['title']
+        self.ids.data_1.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+
+        dish = dishes_list_now[1]
+        source = str(dish['image_uri']).replace("\\", "")
+        self.ids.image_2.source = source
+        self.ids.title_2.text = dish['title']
+        self.ids.data_2.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+
+        dish = dishes_list_now[2]
+        source = str(dish['image_uri']).replace("\\", "")
+        self.ids.image_3.source = source
+        self.ids.title_3.text = dish['title']
+        self.ids.data_3.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
 
 
 
@@ -87,7 +120,6 @@ class PhotoFoodS1Uri(Screen):
         dishes_json = requests.get(page_url, headers = headers)
 
         dishes_list = json.loads(dishes_json.text)
-
         MainApp.get_running_app().screen_manager.current = 'photo_food_rec'
       
 
