@@ -1,5 +1,6 @@
 <AddResult>:
     name: "add_result"
+    _app: app
 
     MDBoxLayout:
         # Add padding and spacing
@@ -40,7 +41,7 @@
                 pos_hint: {"center_x": 0.5}
                 size_hint_x: 1.0
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'result_list'
+                    on_press: root.save_result(1)
                     text: "1"
                     font_size: 40
                     pos_hint: {"top": 1}
@@ -51,7 +52,7 @@
                 pos_hint: {"center_x": 0.5}
                 size_hint_x: 1.0
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'result_list'
+                    on_press: root.save_result(2)
                     text: "2"
                     font_size: 40
                     pos_hint: {"top": 1}
@@ -62,7 +63,7 @@
                 pos_hint: {"center_x": 0.5}
                 size_hint_x: 1.0
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'result_list'
+                    on_press: root.save_result(3)
                     text: "3"
                     font_size: 40
                     pos_hint: {"top": 1}
@@ -81,7 +82,7 @@
                 pos_hint: {"center_x": 0.5}
                 size_hint_x: 1.0
             MDFillRoundFlatButton:
-                on_press: app.screen_manager.current = 'result_list'
+                on_press: root.save_result(4)
                 text: "4"
                 font_size: 40
                 pos_hint: {"top": 1}
@@ -92,7 +93,7 @@
                 pos_hint: {"center_x": 0.5}
                 size_hint_x: 1.0
             MDFillRoundFlatButton:
-                on_press: app.screen_manager.current = 'result_list'
+                on_press: root.save_result(5)
                 text: "5"
                 font_size: 40
                 pos_hint: {"top": 1}
@@ -103,7 +104,7 @@
                 pos_hint: {"center_x": 0.5}
                 size_hint_x: 1.0
             MDFillRoundFlatButton:
-                on_press: app.screen_manager.current = 'result_list'
+                on_press: root.save_result(6)
                 text: "6"
                 pos_hint: {"top": 1}
                 font_size: 40
@@ -121,7 +122,7 @@
             MDBoxLayout:
                 size_hint_x: 1.0
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'result_list'
+                    on_press: root.save_result(7)
                     text: "7"
                     pos_hint: {"top": 1}
                     font_size: 40
@@ -131,7 +132,7 @@
             MDBoxLayout:
                 size_hint_x: 1.0
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'result_list'
+                    on_press: root.save_result(8)
                     text: "8"
                     font_size: 40
                     pos_hint: {"top": 1}
@@ -141,7 +142,7 @@
             MDBoxLayout:
                 size_hint_x: 1.0
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'result_list'
+                    on_press: root.save_result(9)
                     text: "9"
                     font_size: 40
                     pos_hint: {"top": 1}

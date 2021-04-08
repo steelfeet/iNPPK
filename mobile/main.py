@@ -30,6 +30,7 @@ from kivymd.uix.label import MDLabel
 Builder.load_file('ui.kv')
 
 dishes_list = []
+result_type = 0
 
 class IncrediblyCrudeClock():
     def update(self, elem, *largs):
@@ -310,9 +311,33 @@ class ToDoList(Screen):
 
 class ResultList(Screen):
     _app = ObjectProperty()
+    def add_result(self, res):
+        global result_type
+        result_type = res
+        MainApp.get_running_app().screen_manager.current = 'add_result'
 
 class AddResult(Screen):
     _app = ObjectProperty()
+    def save_result(self, ball):
+        global result_type
+        
+        db_request = {}
+        db_request['code'] = 'add_action'
+        db_request['action'] = 'add_result'
+        db_request['tm_id'] = self._app.user_data["tm_id"]
+        db_request['vk_id'] = self._app.user_data["vk_id"]
+        db_request['data_1'] = int(result_type)
+        db_request['data_2'] = int(ball)
+        db_request['data'] = "data_1=>result_type; data_2=>ball;"
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
+        db_json = json.dumps(db_request, ensure_ascii=False)
+        page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+        print(page_url)
+        t = requests.get(page_url, headers = headers)
+        print(t.text)
+        
+        
+        MainApp.get_running_app().screen_manager.current = 'result_list'
 
 
 

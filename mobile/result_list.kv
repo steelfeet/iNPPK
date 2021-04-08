@@ -1,5 +1,6 @@
 <ResultList>:
     name: "result_list"
+    _app: app
 
     MDBoxLayout:
         # Add padding and spacing
@@ -59,7 +60,7 @@
                     padding: 5
                     size_hint_x: 0.3
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'add_result'
+                    on_press: root.add_result(1)
                     text: "Ум"
                     font_size: 20
                     text_color: rgba("#000000")
@@ -71,7 +72,7 @@
                     padding: 5
                     size_hint_x: 0.3
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'add_result'
+                    on_press: root.add_result(2)
                     text: "Эмоции"
                     font_size: 20
                     text_color: rgba("#000000")
@@ -83,7 +84,7 @@
                     padding: 5
                     size_hint_x: 0.3
                 MDFillRoundFlatButton:
-                    on_press: app.screen_manager.current = 'add_result'
+                    on_press: root.add_result(3)
                     text: "Здоровье"
                     font_size: 20
                     text_color: rgba("#000000")
