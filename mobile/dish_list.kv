@@ -146,11 +146,12 @@
 
 
         MDFillRoundFlatButton:
+            id: calories_color_butt
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(50)
             pos_hint: {"center_x": .5}
-            md_bg_color: rgba("#A590CA")
+            md_bg_color: 0, 1, 1, 1
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -214,21 +215,22 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
-                    source:"dish6.jpg"
+                AsyncImage:
+                    id: image_reccom
+                    #source:"dish6.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
 
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
-                        text:"Блины тонкие на молоке"
+                        id: title_reccom
+                        #text:"Блины тонкие на молоке"
                         font_size: 20
-
                     Label:
-                        text:"Калорий: 151; Б: 10,1 г. Ж: 20 г. У: 41 г."
+                        id: data_reccom
+                        #text:"Калорий: 151; Б: 10,1 г. Ж: 20 г. У: 41 г."
                         font_size: 12
         
 
