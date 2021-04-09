@@ -29,10 +29,6 @@
             width: self.width
             allow_stretch: True
 
-        #Список результатов
-
-
-
 
         MDTextField:
             id: tm_id
@@ -59,7 +55,17 @@
             pos_hint: {"center_x": .5}
             mode: "rectangle"
 
+        MDBoxLayout:
+            orientation: 'horizontal'
+            padding: 3
+            MDCheckbox:
+                id : is_model            
+            MDLabel:
+                text: "Модель #1"
 
+
+        Widget:
+        
         MDFillRoundFlatButton:
             on_press: root.save_settings()
             font_size: 20

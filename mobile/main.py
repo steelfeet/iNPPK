@@ -58,11 +58,18 @@ class SettingsList(Screen):
             MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.vk_id.text = self._app.user_data["vk_id"]
         except:
             pass
-    
+
+        try:
+            MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.is_model.active = self._app.user_data["is_model"]
+        except:
+            pass
+
+
     def save_settings(self):
         self._app.user_data = ast.literal_eval(self._app.config.get('General', 'user_data'))
         self._app.user_data["tm_id"] = self.ids.tm_id.text
         self._app.user_data["vk_id"] = self.ids.vk_id.text
+        self._app.user_data["is_model"] = self.ids.is_model.active
 
         self._app.config.set('General', 'user_data', self._app.user_data)
         self._app.config.write()
@@ -84,7 +91,10 @@ class DishList(Screen):
         db_request['vk_id'] = self._app.user_data["vk_id"]
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request)
-        page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+        if (self._app.user_data["is_model"]):
+            page_url = "https://steelfeet.ru/app/get_1.php?q=" + db_json
+        else:
+            page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
         print("запрос последних: " + page_url)
         t = requests.get(page_url, headers = headers)
 
@@ -96,7 +106,7 @@ class DishList(Screen):
             dish = dishes_list_now[0]
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_1.source = source
-            self.ids.title_1.text = dish['title'][:20]
+            self.ids.title_1.text = dish['title'][:21]
             self.ids.data_1.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
         except Exception as e:
             print(traceback.format_exc())
@@ -105,7 +115,7 @@ class DishList(Screen):
             dish = dishes_list_now[1]
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_2.source = source
-            self.ids.title_2.text = dish['title'][:20]
+            self.ids.title_2.text = dish['title'][:21]
             self.ids.data_2.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
         except Exception as e:
             print(traceback.format_exc())
@@ -114,7 +124,7 @@ class DishList(Screen):
             dish = dishes_list_now[2]
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_3.source = source
-            self.ids.title_3.text = dish['title'][:20]
+            self.ids.title_3.text = dish['title'][:21]
             self.ids.data_3.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
         except Exception as e:
             print(traceback.format_exc())
@@ -133,7 +143,10 @@ class DishList(Screen):
         db_request['vk_id'] = self._app.user_data["vk_id"]
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request)
-        page_url = "https://steelfeet.ru/app/reccom_dish.php?q=" + db_json
+        if (self._app.user_data["is_model"]):
+            page_url = "https://steelfeet.ru/app/reccom_1.php"
+        else:
+            page_url = "https://steelfeet.ru/app/reccom_dish.php?q=" + db_json
         print("запрос рекомендации: " + page_url)
         t = requests.get(page_url, headers = headers)
             
@@ -143,7 +156,7 @@ class DishList(Screen):
 
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_reccom.source = source
-            self.ids.title_reccom.text = dish['title'][:20]
+            self.ids.title_reccom.text = dish['title'][:21]
             self.ids.data_reccom.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
         except Exception as e:
             print(traceback.format_exc())
@@ -152,6 +165,8 @@ class DishList(Screen):
 
 class PhotoFoodS1Uri(Screen):
     _app = ObjectProperty()
+    def on_enter(self):
+        self.ids.photo_emulation.text = ""
 
     def send_uri(self):
         global dishes_list
@@ -251,7 +266,7 @@ class ReadList(Screen):
         try:
             items_list_now = json.loads(t.text)
             item = items_list_now[0]
-            self.ids.title_1.text = item['data_4']
+            self.ids.title_1.text = item['data_4'][:30]
             self.ids.href_1.text = item['data_3']
         except:
             pass
