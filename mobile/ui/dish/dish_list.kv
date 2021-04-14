@@ -1,5 +1,6 @@
-<DishList2>:
-    name: "dish_list2"
+<DishList>:
+    name: "dish_list"
+    _app: app
 
     MDBoxLayout:
         # Add padding and spacing
@@ -44,26 +45,28 @@
             size_hint_y: None
             height: dp(60)
             pos_hint: {"center_x": .5}
+            
             MDBoxLayout:
                 orientation: 'horizontal'
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
-                    source:"recogn1.jpg"
+                AsyncImage:
+                    id: image_1
+                    #source:"ui/dish/dish1.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
 
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
-                        text:"Макароны по-флотски"
+                        id: title_1
+                        #text:"Салат овощной с сыром"
                         font_size: 20
-
                     Label:
-                        text:"Калорий: 320; Б: 7,2 г. Ж: 17 г. У: 54 г."
+                        id: data_1
+                        #text:"Калорий: 120; Б: 0,2 г. Ж: 7 г. У: 64 г."
                         font_size: 12
 
 
@@ -78,21 +81,22 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
-                    source:"dish1.jpg"
+                AsyncImage:
+                    id: image_2
+                    #source:"ui/dish/dish2.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
 
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
-                        text:"Салат овощной с сыром"
+                        id: title_2
+                        #text:"Креветки вареные"
                         font_size: 20
-
                     Label:
-                        text:"Калорий: 120; Б: 0,2 г. Ж: 7 г. У: 64 г."
+                        id: data_2
+                        #text:"Калорий: 240; Б: 4,2 г. Ж: 2 г. У: 11 г."
                         font_size: 12
 
 
@@ -107,24 +111,25 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
-                    source:"dish2.jpg"
+                AsyncImage:
+                    id: image_3
+                    #source:"ui/dish/dish5.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
 
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
-                        text:"Креветки вареные"
+                        id: title_3
+                        #text:"Сырный суп"
                         font_size: 20
-
                     Label:
-                        text:"Калорий: 240; Б: 4,2 г. Ж: 2 г. У: 11 г."
+                        id: data_3
+                        #text:"Калорий: 320; Б: 5,2 г. Ж: 12 г. У: 41 г."
                         font_size: 12
 
-
+        
         
         
         
@@ -141,11 +146,12 @@
 
 
         MDFillRoundFlatButton:
+            id: calories_color_butt
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(50)
             pos_hint: {"center_x": .5}
-            md_bg_color: rgba("#B5B08A")
+            md_bg_color: 0, 1, 1, 1
 
             MDBoxLayout:
                 orientation: 'horizontal'
@@ -209,21 +215,22 @@
                 padding: 3
                 pos_hint: {"center_x": 0}
 
-                FitImage:
-                    source:"dish2-rec.jpg"
+                AsyncImage:
+                    id: image_reccom
+                    #source:"ui/dish/dish6.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
 
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: 5
-
                     Label:
-                        text:"Машеровский салат"
+                        id: title_reccom
+                        #text:"Блины тонкие на молоке"
                         font_size: 20
-
                     Label:
-                        text:"Калорий: 51; Б: 7,8 г. Ж: 11 г. У: 26 г."
+                        id: data_reccom
+                        #text:"Калорий: 151; Б: 10,1 г. Ж: 20 г. У: 41 г."
                         font_size: 12
         
 
@@ -259,7 +266,12 @@
             MDBoxLayout:
                 size_hint_x: 0.3
             MDFillRoundFlatButton:
-                on_press: app.screen_manager.current = 'photo_food'
+                #презентационный вариант, с фотографией
+                #on_press: app.screen_manager.current = 'photo_food-present'
+                #реальный продакт, с камерой
+                #on_press: app.screen_manager.current = 'photo_food'
+                #вариант для видео, с вводом ссылки на картинку
+                on_press: app.screen_manager.current = 'photo_food_s1_imuri'
                 text: "Фото"
                 font_size: 20
                 text_color: rgba("#000000")
