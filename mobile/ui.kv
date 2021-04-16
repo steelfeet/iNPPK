@@ -131,6 +131,16 @@
             pos_hint: {"center_x": .5}
 
  
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'vacancies'
+            text: "Вакансии"
+            font_size: 20
+            md_bg_color: rgba("#2196F3")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
 
         MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'result_list'
@@ -141,6 +151,12 @@
             size_hint_y: None
             height: dp(40)
             pos_hint: {"center_x": .5}
+
+
+
+
+
+
 
         Widget:    
 
@@ -161,6 +177,7 @@
 #:include force result_list.kv
 #:include force add_result.kv
 
+#:include force ui/vacancies/vacancies.kv
 
 
 
