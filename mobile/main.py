@@ -429,6 +429,8 @@ class AddResult(Screen):
         MainApp.get_running_app().screen_manager.current = 'result_list'
 
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+exec(open(os.path.join(basedir, "ui/vacancies/vacancies_list.py")).read())
 
 
 class MainApp(MDApp):

@@ -34,6 +34,9 @@
     SleepingMode:
         id: sleep_mode
 
+    VacanciesList:
+        id: vacancies_list
+
     ToDoList:
         id: todo_list
 
@@ -132,7 +135,7 @@
 
  
         MDFillRoundFlatButton:
-            on_press: app.screen_manager.current = 'vacancies'
+            on_press: app.screen_manager.current = 'vacancies_list'
             text: "Вакансии"
             font_size: 20
             md_bg_color: rgba("#2196F3")

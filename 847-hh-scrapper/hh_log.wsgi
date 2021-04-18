@@ -17,20 +17,18 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import desc
 
 #---------------------------------- Variables ----------
-DATABASE_USER = 'id35114350'
-DATABASE_PASSWORD = 'Hgatrdy5rTeq'
-DATABASE_HOST = 'localhost'
-DATABASE_NAME = 'id35114350_hh'
+
 
 #---------------------------------- Variables End ----------
 
 
 def application(env, start_response):
     out_s = ""
-    engine = create_engine(
-            f'mysql+pymysql://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}',
-            pool_pre_ping=True
-        )
+    #Инициализация SQLLite
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'hhtm.db')
+    engine = create_engine(SQLALCHEMY_DATABASE_URI, pool_pre_ping=True)
+
     
     Base = declarative_base()
     class Vacancies(Base):

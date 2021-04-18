@@ -173,16 +173,11 @@ def application(env, start_response):
             'Connection': 'keep-alive'}
 
 
-    print(url)
     response = requests.get(url, headers=headers, params=params)
     post_html = response.text
-    print(post_html)
 
     with open(os.path.join(basedir, 'response.html'), 'w', encoding="utf-8") as f:
         f.write(post_html)
-
-
-    out_s += str(response.status_code)
 
 
     """
@@ -265,6 +260,7 @@ def application(env, start_response):
 
 
     session.commit()
+    out_s += "<br>success"
     start_response('200 OK', [('Content-Type','text/html')])
     b = out_s.encode('utf-8')
     return [b]

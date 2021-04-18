@@ -16,11 +16,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 #---------------------------------- Variables ----------
-DATABASE_USER = 'id35114350'
-DATABASE_PASSWORD = 'Hgatrdy5rTeq'
-DATABASE_HOST = 'localhost'
-DATABASE_NAME = 'id35114350_hh'
-
 areas = {"bryansk":19}
 specializations = ['программист', 'стажер', 'стажировка']
 
@@ -36,11 +31,11 @@ chat_id = "-1001166215020"
 
 def application(env, start_response):
     out_s = ""
-    engine = create_engine(
-            f'mysql+pymysql://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}/{DATABASE_NAME}',
-            pool_pre_ping=True
-        )
-    
+    #Инициализация SQLLite
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'hhtm.db')
+    engine = create_engine(SQLALCHEMY_DATABASE_URI, pool_pre_ping=True)
+
     Base = declarative_base()
     class Vacancies(Base):
         __tablename__ = 'vacancies'
@@ -127,17 +122,17 @@ def application(env, start_response):
 
 
 
-    new_log = Log(
-        action = "post", 
-        status = status, 
-        time = int(time.time()),
-        donor = 'hh.ru', 
-        city = city, 
-        specialization = specialization,
-        vacancies_count = 0, 
-        canal_id = chat_id, 
-        )
-    session.add(new_log)
+        new_log = Log(
+            action = "post", 
+            status = status, 
+            time = int(time.time()),
+            donor = 'hh.ru', 
+            city = city, 
+            specialization = specialization,
+            vacancies_count = 0,
+            canal_id = chat_id, 
+            )
+        session.add(new_log)
 
 
 
