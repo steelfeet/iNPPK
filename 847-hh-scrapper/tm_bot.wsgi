@@ -7,7 +7,7 @@ activate_this = os.path.join(virtual_env, 'bin/activate_this.py')
 exec(open(activate_this).read(), dict(__file__=activate_this))
 
 
-import random, time, datetime
+import random, time, datetime, os
 import telegram
 
 #декларативное определение
@@ -112,12 +112,21 @@ def application(env, start_response):
         try:
             bot = telegram.Bot(token=access_token)
             text = vacancy.title + ": <a href='" + vacancy.href + "'>" + vacancy.href + "</a>"
-            bot.sendMessage(chat_id=chat_id, text=text, parse_mode=telegram.ParseMode.HTML)
-            status = "Ok"
+            tm_response = str(bot.sendMessage(chat_id=chat_id, text=text, parse_mode=telegram.ParseMode.HTML))
+            #ответ не стандартный json
+            tm_response = tm_response.strip("'<>() ").replace("\'", "\"")
+            tm_response = tm_response.replace("False", "\"False\"")
+            message_id = int(json.loads(tm_response)["message_id"])
+            #удаляем следующее сообщение
+            time.sleep(3)
+            message_id = message_id + 1
+            bot.delete_message(chat_id=chat_id, message_id=message_id)
+            status = "Ok test"
             vacancy.canal_city_date = int(time.time())
         except:
             status = str(traceback.format_exc())
-
+            out_s = str(status)
+            out_s = out_s + "<br>" + tm_response
 
 
 

@@ -6,12 +6,14 @@ class VacanciesList(Screen):
     _app = ObjectProperty()
     def on_enter(self):
         db_request = {}
-        db_request['code'] = 'last_read'
+        db_request['code'] = 'last_vacancies'
         db_request['action'] = ''
         db_request['tm_id'] = self._app.user_data["tm_id"]
         db_request['vk_id'] = self._app.user_data["vk_id"]
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request)
+        
+        #отдельный бекенд для вакансий, т.к. он на Python для поиска подходящих вакансий
         page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
         print(page_url)
         t = requests.get(page_url, headers = headers)
