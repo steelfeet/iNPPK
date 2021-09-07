@@ -7,7 +7,7 @@ activate_this = os.path.join(virtual_env, 'bin/activate_this.py')
 exec(open(activate_this).read(), dict(__file__=activate_this))
 
 
-import random, time, datetime, os
+import random, time, datetime, os, re
 import telegram
 
 #декларативное определение
@@ -107,6 +107,7 @@ def application(env, start_response):
 
     now = datetime.datetime.now()
     hour_now = int(now.strftime("%H"))
+
     if ((hour_now > 8) and (hour_now < 20)):
         vacancy = session.query(Vacancies).filter(Vacancies.canal_city_date == 0).first()
         try:
@@ -114,6 +115,7 @@ def application(env, start_response):
             text = vacancy.title + ": <a href='" + vacancy.href + "'>" + vacancy.href + "</a>"
             tm_response = str(bot.sendMessage(chat_id=chat_id, text=text, parse_mode=telegram.ParseMode.HTML))
             #ответ не стандартный json
+            tm_response = tm_response.replace("\\", "\\\\")
             tm_response = tm_response.strip("'<>() ").replace("\'", "\"")
             tm_response = tm_response.replace("False", "\"False\"")
             message_id = int(json.loads(tm_response)["message_id"])
