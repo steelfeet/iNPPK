@@ -82,22 +82,22 @@ class SettingsList(Screen):
 
 #загружаем activity "Дневник питания"
 basedir = os.path.abspath(os.path.dirname(__file__))
-exec(open(os.path.join(basedir, "ui/dish/dish_list.py")).read())
+exec(open(os.path.join(basedir, "ui/dish/dish_list.py"), "rt", encoding="utf-8").read())
 
 
 #загружаем activity "Дневник событий"
 basedir = os.path.abspath(os.path.dirname(__file__))
-exec(open(os.path.join(basedir, "ui/action/action_list.py")).read())
+exec(open(os.path.join(basedir, "ui/action/action_list.py"), "rt", encoding="utf-8").read())
 
 
 #загружаем activity "Читательский дневник"
 basedir = os.path.abspath(os.path.dirname(__file__))
-exec(open(os.path.join(basedir, "ui/read/read_list.py")).read())
+exec(open(os.path.join(basedir, "ui/read/read_list.py"), "rt", encoding="utf-8").read())
 
 
 #загружаем activity "Вакансии"
 basedir = os.path.abspath(os.path.dirname(__file__))
-exec(open(os.path.join(basedir, "ui/vacancies/vacancies_list.py")).read())
+exec(open(os.path.join(basedir, "ui/vacancies/vacancies_list.py"), "rt", encoding="utf-8").read())
 
 
 

@@ -1,6 +1,8 @@
-import os, requests, json, re, traceback
+import requests, json, traceback
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
+
+
 
 class VacanciesList(Screen):
     _app = ObjectProperty()
