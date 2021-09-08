@@ -28,17 +28,17 @@
     ReadList:
         id: read_list
 
-    MusicList:
-        id: music_list
+    #MusicList:
+        #id: music_list
 
-    SleepingMode:
-        id: sleep_mode
+    #SleepingMode:
+        #id: sleep_mode
 
     VacanciesList:
         id: vacancies_list
 
-    ToDoList:
-        id: todo_list
+    #ToDoList:
+        #id: todo_list
 
 
     ResultList:
@@ -115,26 +115,6 @@
             pos_hint: {"center_x": .5}
 
         MDFillRoundFlatButton:
-            on_press: app.screen_manager.current = 'music_list'
-            text: "Музыкальный Дневник"
-            font_size: 20
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-
-        MDFillRoundFlatButton:
-            on_press: app.screen_manager.current = 'sleep_mode'
-            text: "Режим Сна"
-            font_size: 20
-            size_hint_x: 1.0
-            md_bg_color: rgba("#2196F3")
-            size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-
- 
-        MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'vacancies_list'
             text: "Вакансии"
             font_size: 20
@@ -171,11 +151,8 @@
 #:include force ui/dish/photo_food-rec.kv
 #:include force ui/dish/dish_list2.kv
 
-#:include force action_list.kv
-#:include force read_list.kv
-#:include force music_list.kv
-#:include force sleep_mode.kv
-#:include force todo_list.kv
+#:include force ui/action/action_list.kv
+#:include force ui/read/read_list.kv
 
 #:include force result_list.kv
 #:include force add_result.kv

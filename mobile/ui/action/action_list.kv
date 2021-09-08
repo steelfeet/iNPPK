@@ -1,0 +1,176 @@
+<ActionList>:
+    name: "action_list"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "События - iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: app.theme_cls.primary_color
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+        #Список результатов
+        MDFillRoundFlatButton:
+            text: "Последние 5 событий"
+            font_size: 20
+            md_bg_color: rgba("#4575CA")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        MDFillRoundFlatButton:
+            #id: title_1
+            text: "9 Apr 18:17 - Делаю ДЗ"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+
+        MDFillRoundFlatButton:
+            id: title_2
+            text: "8 Apr 18:27 - Делаю ДЗ"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            
+        MDFillRoundFlatButton:
+            id: title_3
+            text: "7 Apr 18:31 - Делаю ДЗ"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            
+        MDFillRoundFlatButton:
+            id: title_4
+            text: "6 Apr 18:00 - Делаю ДЗ"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+
+        MDFillRoundFlatButton:
+            id: title_5
+            text: "5 Apr 18:14 - Делаю ДЗ"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+
+
+
+
+
+        MDTextField:
+            id: action_text
+            hint_text: "Введите название события"
+            helper_text: ""
+            helper_text_mode: "on_focus"
+            size_hint_x: 0.9
+            font_size: 20
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            mode: "rectangle"
+
+        
+        MDBoxLayout:
+            orientation: 'horizontal'
+            pos_hint: {"top": 1}
+                
+            MDBoxLayout:
+                size_hint_x: 0.3
+            MDFillRoundFlatButton:
+                on_press: root.add_action()
+                text: "Добавить"
+                font_size: 20
+                text_color: rgba("#000000")
+                size_hint_y: None
+                pos_hint: {"center_x": .5}
+                height: dp(40)
+
+            MDBoxLayout:
+                size_hint_x: 0.3
+            MDFillRoundFlatButton:
+                text: "Фото"
+                font_size: 20
+                text_color: rgba("#000000")
+                size_hint_y: None
+                pos_hint: {"center_x": .5}
+                height: dp(40)
+
+            MDBoxLayout:
+                size_hint_x: 0.3
+
+
+
+
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Рекомендуем *"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#4575CA")
+
+        MDFillRoundFlatButton:
+            id: title_reccom
+            text: "Делать ДЗ!"
+            font_size: 20
+            text_color: rgba("#FF0000")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+
+
+
+
+
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:    
+
+
+
+
+
+
+
+
+
