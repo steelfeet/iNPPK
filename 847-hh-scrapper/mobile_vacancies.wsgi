@@ -2,6 +2,7 @@
 # 
 import os, json, sys, subprocess, urllib.parse, traceback
 import random, time, datetime, re
+from urllib.parse import unquote
 
 virtual_env = os.path.expanduser('~/projects/world-it-planet/env')
 activate_this = os.path.join(virtual_env, 'bin/activate_this.py')
@@ -39,7 +40,8 @@ def application(env, start_response):
     #получаем $_GET из запроса
     get_query = env['QUERY_STRING']
     get_json = get_query.replace("q=", "")
-    get_json = get_json.replace("%22", '\"')
+    get_json = unquote(get_json)
+
     get_dict = json.loads(get_json)
     tm_id = str(get_dict['tm_id'])
     out_s["tm_id"] = tm_id
@@ -107,9 +109,10 @@ def application(env, start_response):
         "tm_id":tm_id
     }
     params_json = json.dumps(params)
-    url = "https://steelfeet.ru/app/get.php?q=" + params_json
+    get_wp_url = "https://steelfeet.ru/app/get.php?q=" + params_json
+    out_s["get_wp_url"] = get_wp_url
 
-    response = requests.get(url)
+    response = requests.get(get_wp_url)
     wp_id = int(response.text)
     out_s["wp_id"] = wp_id
 
@@ -127,7 +130,6 @@ def application(env, start_response):
 
 
 
-    out_s["get_wp_url"] = url
 
     start_response('200 OK', [('Content-Type','text/html')])
     out_s = json.dumps(out_s)
