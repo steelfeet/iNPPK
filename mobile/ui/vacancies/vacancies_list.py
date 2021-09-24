@@ -8,7 +8,8 @@ class VacanciesList(Screen):
     _app = ObjectProperty()
     def on_enter(self):
         db_request = {}
-        db_request['action'] = "show_vacancy"
+        db_request['code'] = "vacancy"
+        db_request['action'] = "show"
         db_request['tm_id'] = self._app.user_data["tm_id"]
         db_request['vk_id'] = self._app.user_data["vk_id"]
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}

@@ -64,12 +64,19 @@ class SettingsList(Screen):
         except:
             pass
 
+        try:
+            MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.is_prod.active = self._app.user_data["is_prod"]
+        except:
+            pass
+
+
 
     def save_settings(self):
         self._app.user_data = ast.literal_eval(self._app.config.get('General', 'user_data'))
         self._app.user_data["tm_id"] = self.ids.tm_id.text
         self._app.user_data["vk_id"] = self.ids.vk_id.text
         self._app.user_data["is_model"] = self.ids.is_model.active
+        self._app.user_data["is_prod"] = self.ids.is_prod.active
 
         self._app.config.set('General', 'user_data', self._app.user_data)
         self._app.config.write()
