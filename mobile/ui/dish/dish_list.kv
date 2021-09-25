@@ -271,7 +271,11 @@
                 #реальный продакт, с камерой
                 #on_press: app.screen_manager.current = 'photo_food'
                 #вариант для видео, с вводом ссылки на картинку
-                on_press: app.screen_manager.current = 'photo_food_s1_imuri'
+                #on_press: app.screen_manager.current = 'photo_food_s1_imuri'
+                
+                #показываем или камеру или поля для ссылки
+                on_press: root.select_prod()
+
                 text: "Фото"
                 font_size: 20
                 text_color: rgba("#000000")

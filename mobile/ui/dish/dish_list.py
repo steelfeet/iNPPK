@@ -82,6 +82,15 @@ class DishList(Screen):
         except Exception as e:
             print(traceback.format_exc())
 
+    #выбираем показ камеры или текстового поля для ввода ссылки на картинку
+    def select_prod(self):
+        if (self._app.user_data["is_prod"]):
+            self._app.screen_manager.current = 'photo_food_camera'
+        else:
+            self._app.screen_manager.current = 'photo_food_s1_imuri'
+
+
+
 
 
 class PhotoFoodS1Uri(Screen):

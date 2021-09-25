@@ -15,6 +15,7 @@ class VacanciesList(Screen):
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request)
         db_json = db_json.replace(" ", "")
+        print(db_json)
         
         #отдельный бекенд для вакансий, т.к. он на Python для поиска подходящих вакансий
         page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/mobile_vacancies.wsgi?q=" + str(db_json)
@@ -24,7 +25,7 @@ class VacanciesList(Screen):
 
         items_list = json.loads(t.text)
         vacancies = items_list["vacancies"]
-        print("vacancies[0]: " + vacancies[0])
+        print("vacancies[0]: " + vacancies[0]["title"])
         
         #выводим на активити
         self.ids.title_0.text = vacancies[0]["title"]

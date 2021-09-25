@@ -22,19 +22,41 @@ class ReadList(Screen):
 
         items_list = json.loads(t.text)
         links = items_list["links"]
+
+        
+        #разбиваем title на две строчки
+        good_titles = []
+        for link in links:
+            words = []
+            words = link["title"]
+            print("link[title] = " + link["title"])
+            words = link["title"].split(" ")
+            print(words)
+            
+            good_title = ""
+            next_br = True
+            for word in words:
+                good_title = good_title + word + " "
+                print(good_title)
+                if (len(good_title) > 30):
+                    if (next_br):
+                        good_title = good_title + "\n"
+                        next_br = False
+
+            good_titles.append(good_title)
         
         #выводим на активити
-        self.ids.title_0.text = links[0]["title"]
-        self.ids.href_0.text = links[0]["href"]
+        self.ids.title_0.text = good_titles[0]
+        #self.ids.href_0.text = links[0]["href"]
 
-        self.ids.title_1.text = links[1]["title"]
-        self.ids.href_1.text = links[1]["href"]
+        self.ids.title_1.text = good_titles[1]
+        #self.ids.href_1.text = links[1]["href"]
 
-        self.ids.title_2.text = links[2]["title"]
-        self.ids.href_2.text = links[2]["href"]
+        self.ids.title_2.text = good_titles[2]
+        #self.ids.href_2.text = links[2]["href"]
 
-        self.ids.title_3.text = links[3]["title"]
-        self.ids.href_3.text = links[3]["href"]
+        self.ids.title_3.text = good_titles[3]
+        #self.ids.href_3.text = links[3]["href"]
 
-        self.ids.title_4.text = links[4]["title"]
-        self.ids.href_4.text = links[4]["href"]
+        self.ids.title_4.text = good_titles[4]
+        #self.ids.href_4.text = links[4]["href"]
