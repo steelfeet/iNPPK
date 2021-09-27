@@ -11,8 +11,6 @@ from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 
-from kivy.clock import Clock
-Clock.max_iteration = 20
 
 from kivy.config import ConfigParser
 from kivy.config import Config
@@ -36,12 +34,6 @@ def toFixed(numObj, digits=2):
     numObj = float(numObj)
     return float(f"{numObj:.{digits}f}")
 
-class IncrediblyCrudeClock():
-    def update(self, elem, *largs):
-        now = datetime.now()
-        elem.text = now.strftime("%H:%M")
-        crudeclock = IncrediblyCrudeClock()
-        Clock.schedule_once(partial(crudeclock.update, elem), -1)
 
 
 
@@ -180,7 +172,6 @@ class MainApp(MDApp):
         return self.screen_manager
 
     def on_start(self):
-        crudeclock = IncrediblyCrudeClock()
         lbl = self.screen_manager.get_screen("menu").ids.toolbar_clock
         #Clock.schedule_once(partial(crudeclock.update, lbl), -1)
 
