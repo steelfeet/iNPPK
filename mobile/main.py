@@ -93,7 +93,7 @@ exec(open(os.path.join(basedir, "ui/dish/dish_list.py"), "rt", encoding="utf-8")
 
 #загружаем activity "Дневник питания"
 basedir = os.path.abspath(os.path.dirname(__file__))
-#exec(open(os.path.join(basedir, "ui/dish/photo_food_camera.py"), "rt", encoding="utf-8").read())
+exec(open(os.path.join(basedir, "ui/dish/photo_food_camera.py"), "rt", encoding="utf-8").read())
 
 
 
