@@ -55,7 +55,7 @@ class DishList(Screen):
         r = toFixed(r)
         g = toFixed(g)
         b = toFixed(b)
-        self.ids.calories_color_butt.md_bg_color = r, g, b, 1
+        #self.ids.calories_color_butt.md_bg_color = r, g, b, 1
 
 
         #рекомендация
@@ -126,31 +126,31 @@ class PhotoFoodRec(Screen):
         source = str(dish['image_uri']).replace("\\", "")
         self.ids.rec_im_1.source = source
         self.ids.title_1.text = dish['title'][:20]
-        self.ids.data_1.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+        #self.ids.data_1.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
 
         dish = dishes_list[1]
         source = str(dish['image_uri']).replace("\\", "")
         self.ids.rec_im_2.source = source
         self.ids.title_2.text = dish['title'][:20]
-        self.ids.data_2.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+        #self.ids.data_2.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
 
         dish = dishes_list[2]
         source = str(dish['image_uri']).replace("\\", "")
         self.ids.rec_im_3.source = source
         self.ids.title_3.text = dish['title'][:20]
-        self.ids.data_3.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+        #self.ids.data_3.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
 
         dish = dishes_list[3]
         source = str(dish['image_uri']).replace("\\", "")
         self.ids.rec_im_4.source = source
         self.ids.title_4.text = dish['title'][:20]
-        self.ids.data_4.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+        #self.ids.data_4.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
 
         dish = dishes_list[4]
         source = str(dish['image_uri']).replace("\\", "")
         self.ids.rec_im_5.source = source
         self.ids.title_5.text = dish['title'][:20]
-        self.ids.data_5.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+        #self.ids.data_5.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
 
 
 

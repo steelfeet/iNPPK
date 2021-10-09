@@ -17,9 +17,12 @@ class ReadList(Screen):
         #отдельный бекенд для ссылок, т.к. он на Python для поиска подходящих вакансий
         page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/mobile_read.wsgi?q=" + str(db_json)
 
+        print()
         print("page_url: " + page_url)
+        print()
         t = requests.get(page_url, headers = headers)
         print(t.text)
+        print()
         
 
         items_list = json.loads(t.text)
@@ -46,9 +49,10 @@ class ReadList(Screen):
                         good_title = good_title + "\n"
                         next_br = False
                         if (len(good_title) > 60):
-                            good_title = re.sub(r'[а-я]+\s?', '',good_title).strip()
+                            #good_title = re.sub(r'[а-я]+\s?', '',good_title).strip()
+                            break
             
-                good_titles.append(good_title)
+            good_titles.append(good_title)
         
         #выводим на активити
         self.ids.title_0.text = good_titles[0]

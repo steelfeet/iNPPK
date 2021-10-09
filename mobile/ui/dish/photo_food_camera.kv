@@ -37,14 +37,19 @@
                 resolution: (640, 480)
                 play: False
             ToggleButton:
-                text: 'Play'
+                text: 'Включить камеру'
+                 
                 on_press: camera.play = not camera.play
+                size_hint_x: 1.0
                 size_hint_y: None
-                height: '48dp'
+                height: dp(60)
+                
             Button:
-                text: 'Capture'
+                text: 'Сфотографировать блюдо'
+                
+                size_hint_x: 1.0
                 size_hint_y: None
-                height: '48dp'
+                height: dp(60)
                 on_press: root.capture()
 
 
