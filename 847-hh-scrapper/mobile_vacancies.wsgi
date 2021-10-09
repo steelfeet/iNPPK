@@ -47,15 +47,12 @@ def application(env, start_response):
     out_s["tm_id"] = tm_id
     
     #Инициализация MySQL
-    try:
-        with connect(
+    mysql_connection = connect(
             host="localhost",
             user="id35114350",
             password="Hgatrdy5rTeq",
-        ) as connection:
-            out_s["mysql"] = "MySql connected"
-    except Error as e:
-        out_s["mysql"] = e
+            database="id35114350_steelfeet",
+        )
 
     #Инициализация SQLLite
     basedir = os.path.abspath(os.path.dirname(__file__))
@@ -116,7 +113,7 @@ def application(env, start_response):
     wp_id = int(response.text)
     out_s["wp_id"] = wp_id
 
-
+    now = datetime.datetime.now()
     vacancies = sqllite_session.query(Vacancies).order_by(desc(Vacancies.parse_date))[0:5]
     vacancies_list = []
     for item in vacancies:
@@ -125,6 +122,19 @@ def application(env, start_response):
             "href" : item.href,
         }
         vacancies_list.append(vacancy_item)
+
+        #добавляем показанные вакансии в лог
+        #INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('', '', '', '', '', '', '', '', '', '');
+
+        mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'show_vacancies', '" + str(item.id) + "', '', '', '', 'data_1=>vacancy_id', '');"
+        
+        with mysql_connection.cursor() as cursor:
+            cursor.execute(mysql_query)
+
+    mysql_connection.commit()
+
+
+
     out_s["vacancies"] = vacancies_list
 
 
