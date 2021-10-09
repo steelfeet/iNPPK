@@ -12,6 +12,7 @@ class ReadList(Screen):
         db_request['vk_id'] = self._app.user_data["vk_id"]
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request)
+        
 
         #отдельный бекенд для ссылок, т.к. он на Python для поиска подходящих вакансий
         page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/mobile_read.wsgi?q=" + str(db_json)
@@ -19,13 +20,15 @@ class ReadList(Screen):
         print("page_url: " + page_url)
         t = requests.get(page_url, headers = headers)
         print(t.text)
+        
 
         items_list = json.loads(t.text)
         links = items_list["links"]
+        
 
         
         #разбиваем title на две строчки
-        good_titles = []
+        good_titles = []   
         for link in links:
             words = []
             words = link["title"]
@@ -42,8 +45,10 @@ class ReadList(Screen):
                     if (next_br):
                         good_title = good_title + "\n"
                         next_br = False
-
-            good_titles.append(good_title)
+                        if (len(good_title) > 60):
+                            good_title = re.sub(r'[а-я]+\s?', '',good_title).strip()
+            
+                good_titles.append(good_title)
         
         #выводим на активити
         self.ids.title_0.text = good_titles[0]
