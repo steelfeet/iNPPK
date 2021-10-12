@@ -244,6 +244,16 @@
 
 
         MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'result_list'
+            text: " Результат >"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            
+        MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'menu'
             text: "< Назад в главное меню"
             font_size: 20
@@ -252,6 +262,9 @@
             size_hint_y: None
             height: dp(40)
             pos_hint: {"center_x": .5}
+
+        
+    
 
 
         Widget:    
