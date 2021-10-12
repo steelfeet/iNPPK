@@ -52,6 +52,8 @@ def application(env, start_response):
             user="id35114350",
             password="Hgatrdy5rTeq",
             database="id35114350_steelfeet",
+            charset='utf8',
+            use_unicode=True            
         )
 
     #Инициализация SQLLite
@@ -119,7 +121,7 @@ def application(env, start_response):
 
     #отбираем непоказанные вакансии с учетом веса слов
     #отбираем показанные вакансии
-    showed_vacancies_query = "SELECT * FROM `sf_log` WHERE (`action` = 'show_vacancies') AND (`user_id` = " + str(wp_id) + ");"
+    showed_vacancies_query = "SELECT `data_1`, `data_3`, `weight` FROM `sf_log` WHERE (`action` = 'show_vacancies') AND (`user_id` = " + str(wp_id) + ");"
     #out_s["showed_vacancies_query"] = showed_vacancies_query
     with mysql_connection.cursor(buffered=True) as cursor:
         cursor.execute(showed_vacancies_query)
@@ -129,11 +131,12 @@ def application(env, start_response):
     #считаем статистику слов
     words_stat = {}
     for item in showed_vacancies:
-        item_id, item_user_id, item_data, item_hour, item_action, item_data_1, item_data_2, item_data_3, item_data_4, item_data, item_weight = item
+        item_id, item_data_3, item_weight = item
         
         showed_vacancies_ids.append(item_id)
         words = str(item_data_3).split(" ")
         for word in words:
+            word = word
             try:
                 words_stat[word] = words_stat[word] + item_weight
             except:
