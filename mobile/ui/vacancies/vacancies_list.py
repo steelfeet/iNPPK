@@ -3,12 +3,26 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 
 
+#нажимающееся изображение
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.image import Image
+
+class ImageButton(ButtonBehavior, Image):
+    pass
+
+
+titles_id = {}
+
 
 class VacanciesList(Screen):
     _app = ObjectProperty()
+
+
     def on_enter(self):
+        titles_id.clear
+        #self.add_widget(ImageButton())
+
         db_request = {}
-        db_request['code'] = "vacancy"
         db_request['action'] = "show"
         db_request['tm_id'] = self._app.user_data["tm_id"]
         db_request['vk_id'] = self._app.user_data["vk_id"]
@@ -18,22 +32,26 @@ class VacanciesList(Screen):
         print(db_json)
         
         #отдельный бекенд для вакансий, т.к. он на Python для поиска подходящих вакансий
-        page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/mobile_vacancies.wsgi?q=" + str(db_json)
+        page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/best_vacancies.wsgi?q=" + str(db_json)
         print(page_url)
         t = requests.get(page_url, headers = headers)
 
         items_list = json.loads(t.text)
-        words = items_list["words"]
-        words = dict(sorted(words.items(), key=lambda item: item[1]))
-        print("words:")
-        print(words)
+        try:
+            words = items_list["words"]
+            words = dict(sorted(words.items(), key=lambda item: item[1]))
+            print("words:")
+            print(words)
+        except:
+            pass
 
         vacancies = items_list["vacancies"]
         print("vacancies:")
         print(vacancies)
         
         #разбиваем title на две строчки
-        good_titles = []   
+        good_titles = []
+        n = 0   
         for item in vacancies:
             words = item["title"].split(" ")
             
@@ -50,8 +68,11 @@ class VacanciesList(Screen):
                             break
             
             good_titles.append(good_title.strip())
+            titles_id[n] = item["id"]
+            n = n + 1
 
 
+        
         #выводим на активити
         self.ids.title_0.text = good_titles[0]
         #self.ids.href_0.text = vacancies[0]["href"]
@@ -68,3 +89,43 @@ class VacanciesList(Screen):
         self.ids.title_4.text = good_titles[4]
         #self.ids.href_4.text = vacancies[4]["href"]
         
+
+    def like_vacancy(self, title_n):
+        global titles_id
+        try:
+            print("vakancy id:" + str(titles_id[title_n]))
+            db_request = {}
+            db_request['action'] = 'like_vacancy'
+            db_request['tm_id'] = self._app.user_data["tm_id"]
+            db_request['vk_id'] = self._app.user_data["vk_id"]
+            db_request['data_1'] = int(titles_id[title_n])
+            db_request['data'] = "data_1=>vacancy_id;"
+            headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
+            db_json = json.dumps(db_request, ensure_ascii=False)
+            page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+            print(page_url)
+            t = requests.get(page_url, headers = headers)
+            print(t.text)
+
+        except:
+            print("titles_id:")
+            print(titles_id)
+        
+
+    def dislike_vacancy(self, title_n):
+        global titles_id
+        print("vakancy id:" + str(titles_id[title_n]))
+        
+        db_request = {}
+        db_request['action'] = 'dislike_vacancy'
+        db_request['tm_id'] = self._app.user_data["tm_id"]
+        db_request['vk_id'] = self._app.user_data["vk_id"]
+        db_request['data_1'] = int(titles_id[title_n])
+        db_request['data'] = "data_1=>vacancy_id;"
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
+        db_json = json.dumps(db_request, ensure_ascii=False)
+        page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+        print(page_url)
+        t = requests.get(page_url, headers = headers)
+        print(t.text)
+

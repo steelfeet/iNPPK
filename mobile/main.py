@@ -25,6 +25,8 @@ from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 
 
+
+
 Builder.load_file('ui.kv')
 
 dishes_list = []
@@ -145,6 +147,8 @@ class MainApp(MDApp):
         self.config = ConfigParser()
         #self.user_data = {}
         self.screen_manager = Factory.ManagerScreens()
+        
+        
 
     def callback(self):
         #self.screen_manager.add_widget(SettingsList(name="settings_list"))

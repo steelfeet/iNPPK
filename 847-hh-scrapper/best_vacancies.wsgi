@@ -134,7 +134,7 @@ def application(env, start_response):
         item_id, item_data_3, item_weight = item
         
         showed_vacancies_ids.append(item_id)
-        words = str(item_data_3).split(" ")
+        words = str(item_data_3).replace('-',' ').split(" ")
         for word in words:
             word = word
             try:
