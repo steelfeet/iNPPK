@@ -31,7 +31,7 @@
 
         #Список результатов
         MDFillRoundFlatButton:
-            text: "Последние 5 вакансий"
+            text: "Лучшие 5 вакансий"
             font_size: 20
             md_bg_color: rgba("#4575CA")
             size_hint_x: 1.0
@@ -40,88 +40,133 @@
             pos_hint: {"center_x": .5} 
 
         MDFillRoundFlatButton:
-            size_hint_x: 1.0
             size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-            MDBoxLayout:
-                orientation: 'vertical'
-                padding: 3
-                Label:
-                    id: title_0
-                Label:
-                    id: href_0
-                    color: rgba("#0000FF")
-
-        MDFillRoundFlatButton:
             size_hint_x: 1.0
-            size_hint_y: None
             height: dp(40)
-            pos_hint: {"center_x": .5}
             MDBoxLayout:
-                orientation: 'vertical'
-                padding: 3
-                Label:
-                    id: title_1
-                Label:
-                    id: href_1
-                    color: rgba("#0000FF")
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                Image:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_0
+                        halign: 'center'
 
-        MDFillRoundFlatButton:
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-            MDBoxLayout:
-                orientation: 'vertical'
-                padding: 3
-                Label:
-                    id: title_2
-                Label:
-                    id: href_2
-                    color: rgba("#0000FF")
-
-        MDFillRoundFlatButton:
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-            MDBoxLayout:
-                orientation: 'vertical'
-                padding: 3
-                Label:
-                    id: title_3
-                Label:
-                    id: href_3
-                    color: rgba("#0000FF")
-
-        MDFillRoundFlatButton:
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-            MDBoxLayout:
-                orientation: 'vertical'
-                padding: 3
-                Label:
-                    id: title_4
-                Label:
-                    id: href_4
-                    color: rgba("#0000FF")
-
-
-
+                Image:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
 
 
         MDFillRoundFlatButton:
-            on_press: app.screen_manager.current = 'result_list'
-            text: " Результат >"
-            font_size: 20
-            md_bg_color: app.theme_cls.primary_light
-            size_hint_x: 1.0
             size_hint_y: None
+            size_hint_x: 1.0
             height: dp(40)
-            pos_hint: {"center_x": .5}
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                Image:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_1
+                        halign: 'center'
+
+                Image:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                Image:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_2
+                        halign: 'center'
+
+                Image:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+
+
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                Image:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_3
+                        halign: 'center'
+
+                Image:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+
+
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                Image:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_4
+                        halign: 'center'
+
+                Image:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)                                                            
+
 
         MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'menu'

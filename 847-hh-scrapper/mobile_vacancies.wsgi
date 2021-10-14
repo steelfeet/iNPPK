@@ -144,7 +144,7 @@ def application(env, start_response):
         out_s["words"] = words_stat
     
     #считаем веса для непоказанных вакансий
-    vacancies = sqllite_session.query(Vacancies).order_by(desc(Vacancies.parse_date))[0:100]
+    vacancies = sqllite_session.query(Vacancies).order_by(desc(Vacancies.parse_date))[0:500]
    
     vacancies_list = []
     for item in vacancies:
