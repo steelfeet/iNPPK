@@ -29,9 +29,12 @@
             width: self.width
             allow_stretch: True
 
+
+
+
         #Список результатов
         MDFillRoundFlatButton:
-            text: "Лучшие 5 вакансий"
+            text: "Лучшие вакансии"
             font_size: 20
             md_bg_color: rgba("#4575CA")
             size_hint_x: 1.0
@@ -175,6 +178,171 @@
                     on_press: root.dislike_vacancy(4)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        MDFillRoundFlatButton:
+            text: "Последние вакансии"
+            font_size: 20
+            md_bg_color: rgba("#4575CA")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.like_vacancy(5)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_5
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(5)
+
+
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(6)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_6
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(6)
+
+
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(7)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_7
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(7)
+
+
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(8)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_8
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(8)
+
+
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(9)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_9
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)                                                            
+                    on_press: root.dislike_vacancy(9)
+
+
         MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'menu'
             text: "< Назад в главное меню"
@@ -184,8 +352,6 @@
             size_hint_y: None
             height: dp(40)
             pos_hint: {"center_x": .5}
-
-      
 
 
         Widget:    
