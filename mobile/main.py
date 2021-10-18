@@ -25,6 +25,13 @@ from kivymd.app import MDApp
 from kivymd.uix.label import MDLabel
 
 
+#нажимающееся изображение
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.image import Image
+
+class ImageButton(ButtonBehavior, Image):
+    pass
+
 
 
 Builder.load_file('ui.kv')

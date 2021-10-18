@@ -3,24 +3,33 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 
 
-#нажимающееся изображение
-from kivy.uix.behaviors import ButtonBehavior
-from kivy.uix.image import Image
-
-class ImageButton(ButtonBehavior, Image):
-    pass
-
 
 titles_id = {}
-
+showed_vacancies_ids = []
+showed_vacancies = []
 
 class VacanciesList(Screen):
     _app = ObjectProperty()
 
 
+    def reload(self):
+        db_request = {}
+        db_request['tm_id'] = self._app.user_data["tm_id"]
+        db_request['vk_id'] = self._app.user_data["vk_id"]
+        db_request['showed_vacancies'] = showed_vacancies
+        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
+        db_json = json.dumps(db_request)
+        
+        #отдельный бекенд для вакансий, т.к. он на Python для поиска подходящих вакансий
+        page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/next_vacancies.wsgi?q=" + str(db_json)
+        requests.get(page_url, headers = headers)
+        self.on_enter()
+
+
     def on_enter(self):
         titles_id.clear
         #self.add_widget(ImageButton())
+        print()
 
         db_request = {}
         db_request['action'] = "show"
@@ -29,11 +38,9 @@ class VacanciesList(Screen):
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request)
         db_json = db_json.replace(" ", "")
-        print(db_json)
         
         #отдельный бекенд для вакансий, т.к. он на Python для поиска подходящих вакансий
         page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/best_vacancies.wsgi?q=" + str(db_json)
-        print(page_url)
         t = requests.get(page_url, headers = headers)
 
         items_list = json.loads(t.text)
@@ -48,12 +55,18 @@ class VacanciesList(Screen):
         vacancies = items_list["vacancies"]
         print("vacancies:")
         print(vacancies)
-        
+
         #разбиваем title на две строчки
         good_titles = []
         n = 0   
         for item in vacancies:
             words = item["title"].split(" ")
+            if (item["id"] not in showed_vacancies_ids):
+                showed_item = {}
+                showed_item["title"] = item["title"]
+                showed_item["id"] = item["id"]
+                showed_vacancies_ids.append(item["id"])
+                showed_vacancies.append(showed_item)
             
             good_title = ""
             next_br = True
@@ -99,22 +112,22 @@ class VacanciesList(Screen):
         db_request['vk_id'] = self._app.user_data["vk_id"]
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request)
-        db_json = db_json.replace(" ", "")
-        print(db_json)
         
         #отдельный бекенд для вакансий, т.к. он на Python для поиска подходящих вакансий
         page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/last_vacancies.wsgi?q=" + str(db_json)
-        print(page_url)
         t = requests.get(page_url, headers = headers)
-        print(t.text)
         items_list = json.loads(t.text)
         vacancies = items_list["vacancies"]
-        print("last vacancies:")
-        print(vacancies)
         
         #разбиваем title на две строчки
         for item in vacancies:
             words = item["title"].split(" ")
+            if (item["id"] not in showed_vacancies_ids):
+                showed_item = {}
+                showed_item["title"] = item["title"]
+                showed_item["id"] = item["id"]
+                showed_vacancies_ids.append(item["id"])
+                showed_vacancies.append(showed_item)
             
             good_title = ""
             next_br = True
@@ -165,9 +178,7 @@ class VacanciesList(Screen):
             headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
             db_json = json.dumps(db_request, ensure_ascii=False)
             page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
-            print(page_url)
             t = requests.get(page_url, headers = headers)
-            print(t.text)
 
         except:
             print("titles_id:")
@@ -187,7 +198,5 @@ class VacanciesList(Screen):
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request, ensure_ascii=False)
         page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
-        print(page_url)
         t = requests.get(page_url, headers = headers)
-        print(t.text)
 

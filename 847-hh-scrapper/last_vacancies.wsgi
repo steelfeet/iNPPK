@@ -121,7 +121,6 @@ def application(env, start_response):
 
     vacancies_list = []
     for item in vacancies:
-        #непоказанные
         vacancy_item = {
             "id" : item.id,
             "title" : str(item.title),
@@ -133,14 +132,23 @@ def application(env, start_response):
     #выводим  5
     for item in vacancies_list:
         #добавляем показанные вакансии в лог
-        #INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('', '', '', '', '', '', '', '', '', '');
+        #INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('', '', '', '', '', '', '', '', '', '');
 
-        mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'show_vacancies', '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>vacancy_id, data_3=>vacancy_title', '');"
-        
-        with mysql_connection.cursor() as cursor:
-            cursor.execute(mysql_query)
+        exist_vacancies_query = "SELECT `id` FROM `sf_log` WHERE (`code` = 'vacancy') AND (`data_1` = " + str(item["id"]) + ");"
+        with mysql_connection.cursor(buffered=True) as cursor:
+            cursor.execute(exist_vacancies_query)
+            exist_vacancies = cursor.fetchall()
 
-    mysql_connection.commit()
+
+        if (len(exist_vacancies) == 0):
+            mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'vacancy', 'show_last', '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>vacancy_id, data_3=>vacancy_title', '');"
+            
+            with mysql_connection.cursor() as cursor:
+                cursor.execute(mysql_query)
+                
+        mysql_connection.commit()
+
+    
 
 
 

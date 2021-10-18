@@ -109,82 +109,17 @@ def application(env, start_response):
     }
     params_json = json.dumps(params)
     get_wp_url = "https://steelfeet.ru/app/get.php?q=" + params_json
-    out_s["get_wp_url"] = get_wp_url
 
     response = requests.get(get_wp_url)
     wp_id = int(response.text)
     out_s["wp_id"] = wp_id
 
     now = datetime.datetime.now()
-    #просто последние пять спарсенных
-    #vacancies = sqllite_session.query(Vacancies).order_by(desc(Vacancies.parse_date))[0:5]
 
-    #отбираем показанные вакансии
-    showed_vacancies_query = "SELECT `data_1`, `data_3`, `weight` FROM `sf_log` WHERE (`code` = 'vacancy') AND (`action` = 'show_next') AND (`user_id` = " + str(wp_id) + ");"
-    #out_s["showed_vacancies_query"] = showed_vacancies_query
-    with mysql_connection.cursor(buffered=True) as cursor:
-        cursor.execute(showed_vacancies_query)
-        showed_vacancies = cursor.fetchall()
 
-    showed_vacancies_ids = []
+
+    showed_vacancies = get_dict["showed_vacancies"]
     for item in showed_vacancies:
-        item_id, item_data_3, item_weight = item
-        
-        showed_vacancies_ids.append(item_id)
-
-
-    #считаем статистику слов
-    #отбираем все вакансии
-    all_vacancies_query = "SELECT `data_1`, `data_3`, `weight` FROM `sf_log` WHERE (`code` = 'vacancy') AND (`user_id` = " + str(wp_id) + ");"
-    with mysql_connection.cursor(buffered=True) as cursor:
-        cursor.execute(all_vacancies_query)
-        all_vacancies = cursor.fetchall()
-
-    words_stat = {}
-    for item in all_vacancies:
-        item_id, item_data_3, item_weight = item
-        
-        showed_vacancies_ids.append(item_id)
-        words = str(item_data_3).replace('-',' ').replace('/',' ').replace('\\',' ').replace('(','').replace(')','').split(" ")
-        for word in words:
-            try:
-                if (len(word) > 0):
-                    words_stat[word] = words_stat[word] + item_weight
-            except:
-                words_stat[word] = item_weight
-        out_s["words"] = words_stat
-    
-    #считаем веса для непоказанных вакансий
-    vacancies = sqllite_session.query(Vacancies).order_by(desc(Vacancies.parse_date))[0:500]
-   
-    vacancies_list = []
-    for item in vacancies:
-        #непоказанные
-        if (not(item.id in showed_vacancies_ids)):
-            words = str(item.title).replace('-',' ').replace('/',' ').replace('\\',' ').replace('(','').replace(')','').split(" ")
-            vacancy_weight = 0
-            for word in words:
-                try:
-                    if (len(word) > 0):
-                        vacancy_weight = vacancy_weight + words_stat[word]
-                except:
-                    pass
-        
-            vacancy_item = {
-                "id" : item.id,
-                "weight" : vacancy_weight,
-                "title" : str(item.title),
-                "href" : item.href,
-            }
-            vacancies_list.append(vacancy_item)
-
-    #сортируем по весу
-    vacancies_list = sorted(vacancies_list, key=lambda x: x["weight"], reverse=True)
-    #выводим лучшие 5
-    vacancies_list = vacancies_list[0:5]
-
-
-    for item in vacancies_list:
         #добавляем показанные вакансии в лог
         #INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('', '', '', '', '', '', '', '', '', '');
 
@@ -194,7 +129,7 @@ def application(env, start_response):
             exist_vacancies = cursor.fetchall()
 
         if (len(exist_vacancies) == 0):
-            mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'vacancy', 'show_best', '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>vacancy_id, data_3=>vacancy_title', '');"
+            mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'vacancy', 'show_next',  '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>vacancy_id, data_3=>vacancy_title', '');"
         
         with mysql_connection.cursor() as cursor:
             cursor.execute(mysql_query)
@@ -202,7 +137,7 @@ def application(env, start_response):
     mysql_connection.commit()
 
 
-    out_s["vacancies"] = vacancies_list
+
     start_response('200 OK', [('Content-Type','text/html')])
     out_s = json.dumps(out_s)
     b = out_s.encode('utf-8')

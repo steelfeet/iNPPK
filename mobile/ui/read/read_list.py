@@ -48,9 +48,7 @@ class ReadList(Screen):
                     if (next_br):
                         good_title = good_title + "\n"
                         next_br = False
-                        if (len(good_title) > 60):
-                            #good_title = re.sub(r'[а-я]+\s?', '',good_title).strip()
-                            break
+                        
             
             good_titles.append(good_title)
         
