@@ -13,7 +13,7 @@ import requests
 from mysql.connector import connect, Error
 
 #декларативное определение SQLLite
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import Column, Integer, String, Text, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import desc
@@ -44,6 +44,7 @@ def application(env, start_response):
 
     get_dict = json.loads(get_json)
     tm_id = str(get_dict['tm_id'])
+    vk_id = str(get_dict['vk_id'])
     out_s["tm_id"] = tm_id
     
     #Инициализация MySQL
@@ -58,44 +59,30 @@ def application(env, start_response):
 
     #Инициализация SQLLite
     basedir = os.path.abspath(os.path.dirname(__file__))
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'hhtm.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'habr.db')
     engine = create_engine(SQLALCHEMY_DATABASE_URI, pool_pre_ping=True)
 
     Base = declarative_base()
-    class Vacancies(Base):
-        __tablename__ = 'vacancies'
+    class Links(Base):
+        __tablename__ = 'links'
         id = Column(Integer, primary_key=True, autoincrement=True)
         title = Column(String(512))
-        city = Column(String(20))
-        specialization = Column(String(255))
         href = Column(String(512))
         donor = Column(String(255))
-        vacancy_id = Column(Integer)
-        vacancy_date = Column(Integer)
+        donor_link_id = Column(Integer) #внутренний идентификатор для донора, https://habr.com/ru/company/skillfactory/blog/578014/ -> 578014
         parse_date = Column(Integer)
-        employer = Column(String(255))
-        canal_city_id = Column(Integer)
-        canal_city_date = Column(Integer)
-        canal_spec_id = Column(Integer)
-        canal_spec_date = Column(Integer)
+        text = Column(Text)
 
-        def __init__(self, title, city, specialization, href, donor, vacancy_id, vacancy_date, parse_date, employer, canal_city_id, canal_city_date, canal_spec_id, canal_spec_date):
+        def __init__(self, title, href, donor, donor_link_id, parse_date, text):
             self.title = title
-            self.city = city
-            self.specialization = specialization
             self.href = href
             self.donor = donor
-            self.vacancy_id = vacancy_id
-            self.vacancy_date = vacancy_date
+            self.donor_link_id = donor_link_id
             self.parse_date = parse_date
-            self.employer = employer
-            self.canal_city_id = canal_city_id
-            self.canal_city_date = canal_city_date
-            self.canal_spec_id = canal_spec_id
-            self.canal_spec_date = canal_spec_date
+            self.text = text
 
         def __repr__(self):
-            return "<Vacancy('%s','%s', '%s')>" % (self.title, self.specialization, self.href)
+            return "<Link('%s', '%s')>" % (self.title, self.href)
 
     Session = sessionmaker(bind=engine)
     sqllite_session = Session()
@@ -109,29 +96,44 @@ def application(env, start_response):
     }
     params_json = json.dumps(params)
     get_wp_url = "https://steelfeet.ru/app/get.php?q=" + params_json
+    out_s["get_wp_url"] = get_wp_url
 
     response = requests.get(get_wp_url)
     wp_id = int(response.text)
     out_s["wp_id"] = wp_id
 
-    now = datetime.datetime.now()
-    showed_vacancies = get_dict["showed_vacancies"]
-    for item in showed_vacancies:
-        #добавляем показанные вакансии в лог
-        #INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('', '', '', '', '', '', '', '', '', '');
 
-        exist_vacancies_query = "SELECT `id` FROM `sf_log` WHERE (`code` = 'vacancy') AND (`data_1` = " + str(item["id"]) + ");"
+    links = sqllite_session.query(Links).order_by(desc(Links.parse_date))[0:5]
+    links_list = []
+    for item in links:
+        link_item = {
+            "id" : str(item.id),
+            "title" : str(item.title),
+            "href" : item.href,
+        }
+        links_list.append(link_item)
+
+    out_s["reads"] = links_list
+
+
+    now = datetime.datetime.now()
+    for item in links_list:
+        #добавляем показанные вакансии в лог
+        #INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('', '', '', '', '', '', '', '', '', '');
+
+        exist_vacancies_query = "SELECT `id` FROM `sf_log` WHERE (`code` = 'read') AND (`data_1` = " + str(item["id"]) + ");"
         with mysql_connection.cursor(buffered=True) as cursor:
             cursor.execute(exist_vacancies_query)
             exist_vacancies = cursor.fetchall()
 
-        if (len(exist_vacancies) == 0):
-            mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'vacancy', 'show_next',  '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>vacancy_id, data_3=>vacancy_title', '');"
-        
-        with mysql_connection.cursor() as cursor:
-            cursor.execute(mysql_query)
 
-    mysql_connection.commit()
+        if (len(exist_vacancies) == 0):
+            mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'read', 'show_last', '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>read_id, data_3=>read_title', '');"
+            
+            with mysql_connection.cursor() as cursor:
+                cursor.execute(mysql_query)
+                
+        mysql_connection.commit()
 
 
 

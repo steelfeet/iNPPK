@@ -48,15 +48,14 @@ def application(env, start_response):
     out_s["tm_id"] = tm_id
     
     #Инициализация MySQL
-    try:
-        with connect(
+    mysql_connection = connect(
             host="localhost",
             user="id35114350",
             password="Hgatrdy5rTeq",
-        ) as connection:
-            out_s["mysql"] = "MySql connected"
-    except Error as e:
-        out_s["mysql"] = e
+            database="id35114350_steelfeet",
+            charset='utf8',
+            use_unicode=True            
+        )
 
     #Инициализация SQLLite
     basedir = os.path.abspath(os.path.dirname(__file__))
@@ -104,17 +103,25 @@ def application(env, start_response):
     out_s["wp_id"] = wp_id
 
 
-    links = sqllite_session.query(Links).order_by(desc(Links.parse_date))[0:5]
-    links_list = []
-    for item in links:
-        link_item = {
-            "title" : str(item.title),
-            "href" : item.href,
-        }
-        links_list.append(link_item)
-    out_s["links"] = links_list
+    now = datetime.datetime.now()
+    showed_read = get_dict["showed_read"]
+    for item in showed_read:
+        #добавляем показанные вакансии в лог
+        #INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('', '', '', '', '', '', '', '', '', '');
 
+        exist_vacancies_query = "SELECT `id` FROM `sf_log` WHERE (`code` = 'read') AND (`data_1` = " + str(item["id"]) + ") AND (`action` = 'show_next') AND (`user_id` = " + str(wp_id) + ") ;"
+        with mysql_connection.cursor(buffered=True) as cursor:
+            cursor.execute(exist_vacancies_query)
+            exist_vacancies = cursor.fetchall()
 
+        out_s["exist_vacancies_query"] = exist_vacancies_query
+        if (len(exist_vacancies) == 0):
+            mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'read', 'show_next',  '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>read_id, data_3=>read_title', '');"
+        
+        with mysql_connection.cursor() as cursor:
+            cursor.execute(mysql_query)
+
+        mysql_connection.commit()
 
 
 
