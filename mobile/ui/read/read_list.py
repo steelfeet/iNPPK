@@ -83,10 +83,16 @@ class ReadList(Screen):
             next_br = True
             for word in words:
                 good_title = good_title + word + " "
-                if (len(good_title) > 30):
+                if len(good_title) > 50:
+                    break
+                if (len(good_title) > 25):
                     if (next_br):
                         good_title = good_title + "\n"
                         next_br = False
+                         
+
+
+                        
                         
             
             good_titles.append(good_title)
@@ -145,7 +151,9 @@ class ReadList(Screen):
             next_br = True
             for word in words:
                 good_title = good_title + word + " "
-                if (len(good_title) > 30):
+                if len(good_title) > 50:
+                    break
+                if (len(good_title) > 25):
                     if (next_br):
                         good_title = good_title + "\n"
                         next_br = False

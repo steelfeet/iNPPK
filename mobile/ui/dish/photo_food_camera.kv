@@ -32,25 +32,34 @@
         #https://kivy.org/doc/stable/examples/gen__camera__main__py.html
         CameraClick:
             orientation: 'vertical'
+            padding: 5
+            spacing: 5
+
             Camera:
                 id: camera
                 resolution: (640, 480)
                 play: False
-            ToggleButton:
+            
+            MDFillRoundFlatButton:
                 text: 'Включить камеру'
-                 
-                on_press: camera.play = not camera.play
-                size_hint_x: 1.0
-                size_hint_y: None
-                height: dp(60)
                 
-            Button:
+                on_press: camera.play = not camera.play
+                font_size: 20
+                
+                eight: dp(40)
+                size_hint_x: 1.0
+                
+
+            MDFillRoundFlatButton:
                 text: 'Сфотографировать блюдо'
                 
+                on_press: root.capture()
+                font_size: 20
+                
                 size_hint_x: 1.0
                 size_hint_y: None
-                height: dp(60)
-                on_press: root.capture()
+                height: dp(40)
+                pos_hint: {"center_x": .5}
 
 
 

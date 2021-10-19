@@ -28,7 +28,7 @@ class DishList(Screen):
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_1.source = source
             self.ids.title_1.text = dish['title'][:21]
-            self.ids.data_1.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+            #self.ids.data_1.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
         except Exception as e:
             print(traceback.format_exc())
 
@@ -37,7 +37,7 @@ class DishList(Screen):
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_2.source = source
             self.ids.title_2.text = dish['title'][:21]
-            self.ids.data_2.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+            #self.ids.data_2.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
         except Exception as e:
             print(traceback.format_exc())
 
@@ -46,7 +46,7 @@ class DishList(Screen):
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_3.source = source
             self.ids.title_3.text = dish['title'][:21]
-            self.ids.data_3.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+            #self.ids.data_3.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
         except Exception as e:
             print(traceback.format_exc())
 
@@ -78,7 +78,7 @@ class DishList(Screen):
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_reccom.source = source
             self.ids.title_reccom.text = dish['title'][:21]
-            self.ids.data_reccom.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+            #self.ids.data_reccom.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
         except Exception as e:
             print(traceback.format_exc())
 
