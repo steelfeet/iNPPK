@@ -36,8 +36,12 @@ class ImageButton(ButtonBehavior, Image):
 
 Builder.load_file('ui.kv')
 
+#переменные, глобальные между окнами
 dishes_list = []
 result_type = 0
+selected_pop = ""
+
+
 
 def toFixed(numObj, digits=2):
     numObj = float(numObj)
@@ -93,23 +97,20 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 exec(open(os.path.join(basedir, "ui/dish/dish_list.py"), "rt", encoding="utf-8").read())
 
 #загружаем activity "Дневник питания"
-basedir = os.path.abspath(os.path.dirname(__file__))
 exec(open(os.path.join(basedir, "ui/dish/photo_food_camera.py"), "rt", encoding="utf-8").read())
 
 
 
 #загружаем activity "Дневник событий"
-basedir = os.path.abspath(os.path.dirname(__file__))
 exec(open(os.path.join(basedir, "ui/action/action_list.py"), "rt", encoding="utf-8").read())
+exec(open(os.path.join(basedir, "ui/action/pop_actions_list.py"), "rt", encoding="utf-8").read())
 
 
 #загружаем activity "Читательский дневник"
-basedir = os.path.abspath(os.path.dirname(__file__))
 exec(open(os.path.join(basedir, "ui/read/read_list.py"), "rt", encoding="utf-8").read())
 
 
 #загружаем activity "Вакансии"
-basedir = os.path.abspath(os.path.dirname(__file__))
 exec(open(os.path.join(basedir, "ui/vacancies/vacancies_list.py"), "rt", encoding="utf-8").read())
 
 
