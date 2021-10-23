@@ -79,7 +79,7 @@
             left_action_items: [["menu", lambda x: app.callback()]]
             #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
             height: dp(30)
-            md_bg_color: app.theme_cls.primary_color
+            md_bg_color: rgba("#5C96E0")
             #font_size: 10
 
             MDLabel:
@@ -102,6 +102,7 @@
             size_hint_y: None
             height: dp(40)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
 
         MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'action_list'
@@ -111,6 +112,7 @@
             size_hint_y: None
             height: dp(40)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
 
         MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'read_list'
@@ -120,6 +122,7 @@
             size_hint_y: None
             height: dp(40)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
 
         MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'vacancies_list'
@@ -130,13 +133,14 @@
             size_hint_y: None
             height: dp(40)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
 
 
         MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'result_list'
             text: "Результаты"
             font_size: 20
-            md_bg_color: rgba("#4575CA")
+            md_bg_color: rgba("#97CF70")
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(40)

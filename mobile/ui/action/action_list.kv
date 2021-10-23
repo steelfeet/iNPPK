@@ -15,7 +15,7 @@
             left_action_items: [["menu", lambda x: app.callback()]]
             #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
             height: dp(30)
-            md_bg_color: app.theme_cls.primary_color
+            md_bg_color: rgba("#5C96E0")
             font_size: 10
 
             MDLabel:
@@ -39,7 +39,7 @@
             size_hint_y: None
             height: dp(40)
             pos_hint: {"center_x": .5}
-            md_bg_color: rgba("#7545CA")
+            md_bg_color: rgba("#6D7CD6")
 
         MDFillRoundFlatButton:
             id: title_reccom_0
@@ -48,6 +48,7 @@
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
 
         MDFillRoundFlatButton:
             id: title_reccom_1
@@ -56,6 +57,7 @@
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
 
         MDFillRoundFlatButton:
             id: title_reccom_2
@@ -64,6 +66,18 @@
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+        
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'pop_actions_list'
+            text: "< Выбрать из Популярных >"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}                 
 
 
         MDTextField:
@@ -84,49 +98,20 @@
             on_press: root.add_action()
             text: "Добавить"
             font_size: 20
-            text_color: rgba("#000000")
+            md_bg_color: rgba("#97CF70")
+            text_color: rgba("#FFFFEB")
             size_hint_y: None
-            size_hint_x: 1.0
+            size_hint_x: 0.35
             pos_hint: {"center_x": .5}
-            height: dp(40)
-
-
-        MDFillRoundFlatButton:
-            on_press: app.screen_manager.current = 'pop_actions_list'
-            text: "< Выбрать из Популярных >"
-            font_size: 20
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-
-        MDFillRoundFlatButton:
-            on_press: app.screen_manager.current = 'result_list'
-            text: " Результат >"
-            font_size: 20
-            md_bg_color: app.theme_cls.primary_light
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-
-
-
-
-
-
-
-
-
-
-
+            height: dp(40) 
+            
 
 
         #Список результатов
         MDFillRoundFlatButton:
             text: "Последние события"
             font_size: 20
-            md_bg_color: rgba("#4575CA")
+            md_bg_color: rgba("#6D7CD6")
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(40)
@@ -139,6 +124,7 @@
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
 
         MDFillRoundFlatButton:
             id: title_2
@@ -147,6 +133,7 @@
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
             
         MDFillRoundFlatButton:
             id: title_3
@@ -155,17 +142,24 @@
             size_hint_y: None
             height: dp(30)
             pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
             
-
-
-
-
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'result_list'
+            text: " Результат >"
+            font_size: 20
+            md_bg_color: rgba("#97CF70")
+            
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
 
         MDFillRoundFlatButton:
             on_press: app.screen_manager.current = 'menu'
             text: "< Назад в главное меню"
             font_size: 20
-            md_bg_color: app.theme_cls.primary_light
+            md_bg_color: rgba("#6D7CD6")
             size_hint_x: 1.0
             size_hint_y: None
             height: dp(40)
