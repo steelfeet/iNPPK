@@ -6,8 +6,8 @@ class DishList(Screen):
     _app = ObjectProperty()
     def on_enter(self):
         db_request = {}
-        db_request['code'] = 'last_dish'
-        db_request['action'] = ''
+        db_request['code'] = 'dish'
+        db_request['action'] = 'last'
         db_request['tm_id'] = self._app.user_data["tm_id"]
         db_request['vk_id'] = self._app.user_data["vk_id"]
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
@@ -19,81 +19,90 @@ class DishList(Screen):
         print("запрос последних: " + page_url)
         t = requests.get(page_url, headers = headers)
 
-        calories_color = ""
+
+        #рекомендация
         try:
-            response_json = json.loads(t.text)
-            dishes_list_now = response_json["last"]
-            calories_color = response_json["calories"]
-            dish = dishes_list_now[0]
+            items_list = json.loads(t.text)
+            print()
+            print("items_list")
+            print(items_list)
+            
+            items_list_last = items_list["rec"]
+
+            dish = items_list_last[0]
+            source = str(dish['image_uri']).replace("\\", "")
+            self.ids.image_reccom_0.source = source
+            self.ids.title_reccom_0.text = dish['title'][:21]
+
+            dish = items_list_last[1]
+            source = str(dish['image_uri']).replace("\\", "")
+            self.ids.image_reccom_1.source = source
+            self.ids.title_reccom_1.text = dish['title'][:21]
+
+            dish = items_list_last[2]
+            source = str(dish['image_uri']).replace("\\", "")
+            self.ids.image_reccom_2.source = source
+            self.ids.title_reccom_2.text = dish['title'][:21]
+
+        except Exception as e:
+            print(traceback.format_exc())
+
+
+
+
+        #последние
+        try:
+            items_list = json.loads(t.text)
+            items_list_last = items_list["last"]
+
+            dish = items_list_last[0]
+            source = str(dish['image_uri']).replace("\\", "")
+            self.ids.image_0.source = source
+            self.ids.title_0.text = dish['title'][:21]
+
+            dish = items_list_last[1]
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_1.source = source
             self.ids.title_1.text = dish['title'][:21]
-            #self.ids.data_1.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
-        except Exception as e:
-            print(traceback.format_exc())
 
-        try:
-            dish = dishes_list_now[1]
+            dish = items_list_last[2]
             source = str(dish['image_uri']).replace("\\", "")
             self.ids.image_2.source = source
             self.ids.title_2.text = dish['title'][:21]
-            #self.ids.data_2.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
+
         except Exception as e:
             print(traceback.format_exc())
 
-        try:
-            dish = dishes_list_now[2]
-            source = str(dish['image_uri']).replace("\\", "")
-            self.ids.image_3.source = source
-            self.ids.title_3.text = dish['title'][:21]
-            #self.ids.data_3.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
-        except Exception as e:
-            print(traceback.format_exc())
-
-        print("calories_color: " + calories_color)
-        r, g, b = calories_color.split(",")
-        r = toFixed(r)
-        g = toFixed(g)
-        b = toFixed(b)
-        #self.ids.calories_color_butt.md_bg_color = r, g, b, 1
 
 
-        #рекомендация
-        db_request = {}
-        db_request['tm_id'] = self._app.user_data["tm_id"]
-        db_request['vk_id'] = self._app.user_data["vk_id"]
-        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
-        db_json = json.dumps(db_request)
-        if (self._app.user_data["is_model"]):
-            page_url = "https://steelfeet.ru/app/reccom_1.php"
-        else:
-            page_url = "https://steelfeet.ru/app/reccom_dish.php?q=" + db_json
-        print("запрос рекомендации: " + page_url)
-        t = requests.get(page_url, headers = headers)
-            
-        try:
-            dishes_list_now = json.loads(t.text)
-            dish = dishes_list_now
 
-            source = str(dish['image_uri']).replace("\\", "")
-            self.ids.image_reccom.source = source
-            self.ids.title_reccom.text = dish['title'][:21]
-            #self.ids.data_reccom.text = "Калорий: " + str(dish['calories']) + "; Б: " + str(dish['proteinContent']) + " г.; Ж: " + str(dish['fatContent']) + " г.; У: " + str(dish['carbohydrateContent']) + " г."
-        except Exception as e:
-            print(traceback.format_exc())
+
+
+
 
     #выбираем показ камеры или текстового поля для ввода ссылки на картинку
     def select_prod(self):
         if (self._app.user_data["is_prod"]):
             self._app.screen_manager.current = 'photo_food_camera'
         else:
-            self._app.screen_manager.current = 'photo_food_s1_imuri'
+            self._app.screen_manager.current = 'photo_food_imuri'
 
 
 
 
 
-class PhotoFoodS1Uri(Screen):
+
+
+
+
+
+
+
+
+
+
+
+class PhotoFoodUri(Screen):
     _app = ObjectProperty()
     def on_enter(self):
         self.ids.photo_emulation.text = ""
@@ -116,6 +125,18 @@ class PhotoFoodS1Uri(Screen):
 
 class PhotoFood(Screen):
     _app = ObjectProperty()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -157,8 +178,8 @@ class PhotoFoodRec(Screen):
     def select_dish(self, dish_n ):
         dish_id = dishes_list[dish_n]['id']
         db_request = {}
-        db_request['code'] = 'add_action'
-        db_request['action'] = 'add_dish'
+        db_request['code'] = 'dish'
+        db_request['action'] = 'add'
         db_request['tm_id'] = self._app.user_data["tm_id"]
         db_request['vk_id'] = self._app.user_data["vk_id"]
         db_request['data_1'] = int(dish_id)

@@ -30,6 +30,118 @@
             allow_stretch: True
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Рекомендуем *"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#7545CA")
+        
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_reccom_0
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_reccom_0
+                        font_size: 20                   
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_reccom_1
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_reccom_1
+                        font_size: 20                   
+                                       
+
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_reccom_2
+                    #source:"ui/dish/dish6.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_reccom_2
+                        font_size: 20                   
+
+                                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #Список сьеденного
         MDFillRoundFlatButton:
             text: "Последние 3 блюда"
@@ -52,7 +164,7 @@
                 pos_hint: {"center_x": 0}
 
                 AsyncImage:
-                    id: image_1
+                    id: image_0
                     #source:"ui/dish/dish1.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
@@ -61,7 +173,7 @@
                     orientation: 'vertical'
                     padding: 5
                     Label:
-                        id: title_1
+                        id: title_0
                         #text:"Салат овощной с сыром"
                         font_size: 20
                     
@@ -79,7 +191,7 @@
                 pos_hint: {"center_x": 0}
 
                 AsyncImage:
-                    id: image_2
+                    id: image_1
                     #source:"ui/dish/dish2.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
@@ -88,7 +200,7 @@
                     orientation: 'vertical'
                     padding: 5
                     Label:
-                        id: title_2
+                        id: title_1
                         #text:"Креветки вареные"
                         font_size: 20
 
@@ -105,7 +217,7 @@
                 pos_hint: {"center_x": 0}
 
                 AsyncImage:
-                    id: image_3
+                    id: image_2
                     #source:"ui/dish/dish5.jpg"
                     pos_hint: {"center_x": 0.5}
                     size_hint_x: 0.3
@@ -114,90 +226,12 @@
                     orientation: 'vertical'
                     padding: 5
                     Label:
-                        id: title_3
+                        id: title_2
                         #text:"Сырный суп"
                         font_size: 20
 
                             
-        
-        
-        MDFillRoundFlatButton:
-            font_size: 20
-            text: "Рекомендуем *"
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(40)
-            pos_hint: {"center_x": .5}
-            md_bg_color: rgba("#4575CA")
-        
-        MDFillRoundFlatButton:
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(60)
-            pos_hint: {"center_x": .5}
-            
-            MDBoxLayout:
-                orientation: 'horizontal'
-                padding: 3
-                pos_hint: {"center_x": 0}
 
-                AsyncImage:
-                    id: image_reccom                    
-                    pos_hint: {"center_x": 0.5}
-                    size_hint_x: 0.3
-
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    padding: 5
-                    Label:
-                        id: title_reccom                       
-                        font_size: 20                   
-
-        MDFillRoundFlatButton:
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(60)
-            pos_hint: {"center_x": .5}
-            
-            MDBoxLayout:
-                orientation: 'horizontal'
-                padding: 3
-                pos_hint: {"center_x": 0}
-
-                AsyncImage:
-                    id: image_reccom2
-                    pos_hint: {"center_x": 0.5}
-                    size_hint_x: 0.3
-
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    padding: 5
-                                       
-
-
-
-        MDFillRoundFlatButton:
-            size_hint_x: 1.0
-            size_hint_y: None
-            height: dp(60)
-            pos_hint: {"center_x": .5}
-            
-            MDBoxLayout:
-                orientation: 'horizontal'
-                padding: 3
-                pos_hint: {"center_x": 0}
-
-                AsyncImage:
-                    id: image_reccom3
-                    #source:"ui/dish/dish6.jpg"
-                    pos_hint: {"center_x": 0.5}
-                    size_hint_x: 0.3
-
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    padding: 5
-
-                                                    
 
 
 
