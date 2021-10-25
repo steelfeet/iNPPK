@@ -33,6 +33,8 @@ class PhotoFoodCamera(Screen):
         print("response: ")
         print(dishes_json.text)
 
+        os.remove(image_filename)
+
         dishes_list = json.loads(dishes_json.text)
         MainApp.get_running_app().screen_manager.current = 'photo_food_rec'
 
