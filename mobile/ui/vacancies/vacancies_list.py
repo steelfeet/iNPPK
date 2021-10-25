@@ -2,11 +2,14 @@ import requests, json, traceback, urllib
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
 
+import webbrowser
 
 
 titles_id = {}
 showed_vacancies_ids = []
 showed_vacancies = []
+items_hrefs = {}
+
 
 class VacanciesList(Screen):
     _app = ObjectProperty()
@@ -86,6 +89,7 @@ class VacanciesList(Screen):
                     
                     good_titles.append(good_title.strip())
                     titles_id[n] = item["id"]
+                    items_hrefs[n] = item["href"]
                     n = n + 1
 
 
@@ -147,6 +151,7 @@ class VacanciesList(Screen):
                     
                     good_titles.append(good_title.strip())
                     titles_id[n] = item["id"]
+                    items_hrefs[n] = item["href"]
                     n = n + 1
 
 
@@ -206,3 +211,8 @@ class VacanciesList(Screen):
         page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
         t = requests.get(page_url, headers = headers)
 
+
+
+    def go_href(self, title_n):
+        global items_hrefs
+        webbrowser.open_new(str(items_hrefs[title_n]))

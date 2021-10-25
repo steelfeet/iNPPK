@@ -1,11 +1,15 @@
 import os, requests, json, re, traceback
 from kivy.uix.screenmanager import Screen
 from kivy.properties import ObjectProperty
+import webbrowser
+
+
 
 
 titles_id = {}
 showed_items_ids = []
 showed_items = []
+items_hrefs = {}
 
 
 class ReadList(Screen):
@@ -101,6 +105,7 @@ class ReadList(Screen):
                     
                     good_titles.append(good_title)
                     titles_id[n] = item["id"]
+                    items_hrefs[n] = item["href"]
                     n = n + 1
                 
                 #выводим на активити
@@ -165,6 +170,7 @@ class ReadList(Screen):
                     
                     good_titles.append(good_title)
                     titles_id[n] = item["id"]
+                    items_hrefs[n] = item["href"]
                     n = n + 1
                 
                 #выводим на активити
@@ -229,3 +235,9 @@ class ReadList(Screen):
         page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
         t = requests.get(page_url, headers = headers)
 
+
+
+    def go_href(self, title_n):
+        global items_hrefs
+        print("read_href:" + str(items_hrefs[title_n]))
+        webbrowser.open_new(str(items_hrefs[title_n]))
