@@ -74,6 +74,16 @@ class SettingsList(Screen):
         except:
             pass
 
+        #проверка наличия логина ТМ или ВК
+        
+        try:
+            if (len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1):
+                MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.mdl_notify.text = "Введите данные для авторизации"
+        except:
+            print()
+            self.ids.mdl_notify.text = "Введите данные для авторизации"
+
+
 
 
     def save_settings(self):

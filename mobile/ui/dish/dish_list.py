@@ -5,74 +5,76 @@ from kivy.properties import ObjectProperty
 class DishList(Screen):
     _app = ObjectProperty()
     def on_enter(self):
-        db_request = {}
-        db_request['code'] = 'dish'
-        db_request['action'] = 'last'
-        db_request['tm_id'] = self._app.user_data["tm_id"]
-        db_request['vk_id'] = self._app.user_data["vk_id"]
-        headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
-        db_json = json.dumps(db_request)
-        if (self._app.user_data["is_model"]):
-            page_url = "https://steelfeet.ru/app/get_1.php?q=" + db_json
-        else:
-            page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
-        print("запрос последних: " + page_url)
-        t = requests.get(page_url, headers = headers)
-
-
-        #рекомендация
         try:
-            items_list = json.loads(t.text)
-            print()
-            print("items_list")
-            print(items_list)
-            
-            items_list_last = items_list["rec"]
-
-            dish = items_list_last[0]
-            source = str(dish['image_uri']).replace("\\", "")
-            self.ids.image_reccom_0.source = source
-            self.ids.title_reccom_0.text = dish['title'][:21]
-
-            dish = items_list_last[1]
-            source = str(dish['image_uri']).replace("\\", "")
-            self.ids.image_reccom_1.source = source
-            self.ids.title_reccom_1.text = dish['title'][:21]
-
-            dish = items_list_last[2]
-            source = str(dish['image_uri']).replace("\\", "")
-            self.ids.image_reccom_2.source = source
-            self.ids.title_reccom_2.text = dish['title'][:21]
-
-        except Exception as e:
-            print(traceback.format_exc())
+            if (len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1):
+                self._app.screen_manager.current = 'settings_list'
+            else:
+                db_request = {}
+                db_request['code'] = 'dish'
+                db_request['action'] = 'last'
+                db_request['tm_id'] = self._app.user_data["tm_id"]
+                db_request['vk_id'] = self._app.user_data["vk_id"]
+                headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
+                db_json = json.dumps(db_request)
+                if (self._app.user_data["is_model"]):
+                    page_url = "https://steelfeet.ru/app/get_1.php?q=" + db_json
+                else:
+                    page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+                print("запрос последних: " + page_url)
+                t = requests.get(page_url, headers = headers)
 
 
+                #рекомендация
+                try:
+                    items_list = json.loads(t.text)
+                    items_list_last = items_list["rec"]
+
+                    dish = items_list_last[0]
+                    source = str(dish['image_uri']).replace("\\", "")
+                    self.ids.image_reccom_0.source = source
+                    self.ids.title_reccom_0.text = dish['title'][:21]
+
+                    dish = items_list_last[1]
+                    source = str(dish['image_uri']).replace("\\", "")
+                    self.ids.image_reccom_1.source = source
+                    self.ids.title_reccom_1.text = dish['title'][:21]
+
+                    dish = items_list_last[2]
+                    source = str(dish['image_uri']).replace("\\", "")
+                    self.ids.image_reccom_2.source = source
+                    self.ids.title_reccom_2.text = dish['title'][:21]
+
+                except Exception as e:
+                    print(traceback.format_exc())
 
 
-        #последние
-        try:
-            items_list = json.loads(t.text)
-            items_list_last = items_list["last"]
 
-            dish = items_list_last[0]
-            source = str(dish['image_uri']).replace("\\", "")
-            self.ids.image_0.source = source
-            self.ids.title_0.text = dish['title'][:21]
 
-            dish = items_list_last[1]
-            source = str(dish['image_uri']).replace("\\", "")
-            self.ids.image_1.source = source
-            self.ids.title_1.text = dish['title'][:21]
+            #последние
+            try:
+                items_list = json.loads(t.text)
+                items_list_last = items_list["last"]
 
-            dish = items_list_last[2]
-            source = str(dish['image_uri']).replace("\\", "")
-            self.ids.image_2.source = source
-            self.ids.title_2.text = dish['title'][:21]
+                dish = items_list_last[0]
+                source = str(dish['image_uri']).replace("\\", "")
+                self.ids.image_0.source = source
+                self.ids.title_0.text = dish['title'][:21]
 
-        except Exception as e:
-            print(traceback.format_exc())
+                dish = items_list_last[1]
+                source = str(dish['image_uri']).replace("\\", "")
+                self.ids.image_1.source = source
+                self.ids.title_1.text = dish['title'][:21]
 
+                dish = items_list_last[2]
+                source = str(dish['image_uri']).replace("\\", "")
+                self.ids.image_2.source = source
+                self.ids.title_2.text = dish['title'][:21]
+
+            except Exception as e:
+                print(traceback.format_exc())
+
+        except:
+            self._app.screen_manager.current = 'settings_list'
 
 
 
