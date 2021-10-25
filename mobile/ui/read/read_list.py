@@ -7,8 +7,6 @@ import webbrowser
 
 
 titles_id = {}
-showed_items_ids = []
-showed_items = []
 items_hrefs = {}
 
 
@@ -19,11 +17,6 @@ class ReadList(Screen):
         db_request = {}
         db_request['tm_id'] = self._app.user_data["tm_id"]
         db_request['vk_id'] = self._app.user_data["vk_id"]
-        db_request['showed_read'] = showed_items
-        print()
-        print(showed_items_ids)
-        print()
-        print(showed_items)
 
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
         db_json = json.dumps(db_request)
@@ -39,9 +32,6 @@ class ReadList(Screen):
             print(exist_vacancies_query)
         except:
             print()
-
-        showed_items_ids.clear
-        showed_items.clear
 
         self.on_enter()    
     
@@ -67,10 +57,6 @@ class ReadList(Screen):
                     print()
                     print(items_list["words"])
 
-                    print()
-                    print("showed_read_ids")
-                    print(items_list["showed_read_ids"])
-
                 except:
                     print(t.text)
                 
@@ -80,12 +66,6 @@ class ReadList(Screen):
                 for item in links:
                     words = item["title"].split(" ")
 
-                    if (int(item["id"]) not in showed_items_ids):
-                        showed_item = {}
-                        showed_item["title"] = item["title"]
-                        showed_item["id"] = item["id"]
-                        showed_items_ids.append(int(item["id"]))
-                        showed_items.append(showed_item)
 
                     good_title = ""
                     next_br = True
@@ -148,13 +128,6 @@ class ReadList(Screen):
                 #разбиваем title на две строчки
                 for item in links:
                     words = item["title"].split(" ")
-
-                    if (int(item["id"]) not in showed_items_ids):
-                        showed_item = {}
-                        showed_item["title"] = item["title"]
-                        showed_item["id"] = item["id"]
-                        showed_items_ids.append(int(item["id"]))
-                        showed_items.append(showed_item)
 
                     good_title = ""
                     next_br = True

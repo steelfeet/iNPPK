@@ -102,7 +102,7 @@ def application(env, start_response):
     wp_id = int(response.text)
     out_s["wp_id"] = wp_id
 
-
+    """
     now = datetime.datetime.now()
     showed_read = get_dict["showed_read"]
     for item in showed_read:
@@ -122,6 +122,13 @@ def application(env, start_response):
             cursor.execute(mysql_query)
 
         mysql_connection.commit()
+    """
+
+    mysql_query = "UPDATE `sf_log` SET `action` = 'show_next' WHERE `user_id` = '" + str(wp_id) + "' AND `code` = 'read';"
+    with mysql_connection.cursor() as cursor:
+        cursor.execute(mysql_query)
+
+    mysql_connection.commit()
 
 
 

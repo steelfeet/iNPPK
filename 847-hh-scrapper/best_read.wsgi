@@ -183,10 +183,10 @@ def application(env, start_response):
         if (len(exist_vacancies) == 0):
             mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'read', 'show_best', '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>read_id, data_3=>read_title', 0);"
         
-        with mysql_connection.cursor() as cursor:
-            cursor.execute(mysql_query)
+            with mysql_connection.cursor() as cursor:
+                cursor.execute(mysql_query)
 
-    mysql_connection.commit()
+        mysql_connection.commit()
 
 
     out_s["reads"] = reads_list

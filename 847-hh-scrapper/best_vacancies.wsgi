@@ -129,7 +129,6 @@ def application(env, start_response):
     showed_vacancies_ids = []
     for item in showed_vacancies:
         item_id, item_data_3, item_weight = item
-        
         showed_vacancies_ids.append(item_id)
 
 
@@ -144,7 +143,6 @@ def application(env, start_response):
     for item in all_vacancies:
         item_id, item_data_3, item_weight = item
         
-        showed_vacancies_ids.append(item_id)
         words = str(item_data_3).replace('-',' ').replace('/',' ').replace('\\',' ').replace('(','').replace(')','').split(" ")
         for word in words:
             try:
@@ -196,10 +194,10 @@ def application(env, start_response):
         if (len(exist_vacancies) == 0):
             mysql_query = "INSERT INTO `sf_log` (`user_id`, `date`, `hour`, `code`, `action`, `data_1`, `data_2`, `data_3`, `data_4`, `data`, `weight`) VALUES ('" + str(wp_id) + "', '" + str(int(time.time())) + "', '" + str(now.hour) + "', 'vacancy', 'show_best', '" + str(item["id"]) + "', '', '" + str(item["title"]) + "', '', 'data_1=>vacancy_id, data_3=>vacancy_title', '');"
         
-        with mysql_connection.cursor() as cursor:
-            cursor.execute(mysql_query)
+            with mysql_connection.cursor() as cursor:
+                cursor.execute(mysql_query)
 
-    mysql_connection.commit()
+        mysql_connection.commit()
 
 
     out_s["vacancies"] = vacancies_list
