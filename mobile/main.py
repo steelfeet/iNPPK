@@ -79,8 +79,22 @@ class SettingsList(Screen):
         try:
             if (len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1):
                 MainApp.get_running_app().screen_manager.get_screen("settings_list").ids.mdl_notify.text = "Введите данные для авторизации"
+            else:
+                db_request = {}
+                db_request['action'] = 'show_wp_id'
+                db_request['tm_id'] = self._app.user_data["tm_id"]
+                db_request['vk_id'] = self._app.user_data["vk_id"]
+                headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
+                db_json = json.dumps(db_request)
+                page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+                t = requests.get(page_url, headers = headers)
+                
+                if (t.text.isdigit):
+                    self.ids.mdl_notify.text = "Авторизация успешна. WP_ID:" + t.text
+                else:
+                    self.ids.mdl_notify.text = "Неавторизован. WP_ID:" + t.text
+
         except:
-            print()
             self.ids.mdl_notify.text = "Введите данные для авторизации"
 
 
