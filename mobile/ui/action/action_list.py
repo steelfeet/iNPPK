@@ -10,45 +10,41 @@ from kivy.properties import ObjectProperty
 class ActionList(Screen):
     _app = ObjectProperty()
     def on_enter(self):
-        global selected_pop
-        try:
-            if (len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1):
-                self._app.screen_manager.current = 'settings_list'
-            else:
+        global selected_pop, wp_id
+        if ((len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1)):
+            self._app.screen_manager.current = 'settings_list'
+        else:
 
-                db_request = {}
-                db_request['code'] = 'actions'
-                db_request['action'] = 'last'
-                db_request['tm_id'] = self._app.user_data["tm_id"]
-                db_request['vk_id'] = self._app.user_data["vk_id"]
-                headers = {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
-                }
-                db_json = json.dumps(db_request)
-                page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
-                print(page_url)
-                t = requests.get(page_url, headers = headers)
-                print(t.text)
-                items_list = json.loads(t.text)
-                items_list_last = items_list["last"]
+            db_request = {}
+            db_request['code'] = 'actions'
+            db_request['action'] = 'last'
+            db_request['tm_id'] = self._app.user_data["tm_id"]
+            db_request['vk_id'] = self._app.user_data["vk_id"]
+            headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'
+            }
+            db_json = json.dumps(db_request)
+            page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+            print(page_url)
+            t = requests.get(page_url, headers = headers)
+            print(t.text)
+            items_list = json.loads(t.text)
+            items_list_last = items_list["last"]
 
-                try:
-                    item = items_list_last[0]
-                    dt_object = datetime.fromtimestamp(int(item['date']))
-                    self.ids.title_1.text = dt_object.strftime("%d %b %H:%M") + " - " + item['data_3']
-                
-                    item = items_list_last[1]
-                    dt_object = datetime.fromtimestamp(int(item['date']))
-                    self.ids.title_2.text = dt_object.strftime("%d %b %H:%M") + " - " + item['data_3']
+            try:
+                item = items_list_last[0]
+                dt_object = datetime.fromtimestamp(int(item['date']))
+                self.ids.title_1.text = dt_object.strftime("%d %b %H:%M") + " - " + item['data_3']
+            
+                item = items_list_last[1]
+                dt_object = datetime.fromtimestamp(int(item['date']))
+                self.ids.title_2.text = dt_object.strftime("%d %b %H:%M") + " - " + item['data_3']
 
-                    item = items_list_last[2]
-                    dt_object = datetime.fromtimestamp(int(item['date']))
-                    self.ids.title_3.text = dt_object.strftime("%d %b %H:%M") + " - " + item['data_3']
+                item = items_list_last[2]
+                dt_object = datetime.fromtimestamp(int(item['date']))
+                self.ids.title_3.text = dt_object.strftime("%d %b %H:%M") + " - " + item['data_3']
 
-                except:
-                    pass
-
-                
+            
                 #рекомендация
                 items_dict_rec = items_list["rec"]
                 print()
@@ -68,8 +64,9 @@ class ActionList(Screen):
                 #популярное
                 self.ids.action_text.text = selected_pop
 
-        except:
-            self._app.screen_manager.current = 'settings_list'
+            except:
+                pass
+
 
     def add_action(self):
         action_text = self.ids.action_text.text

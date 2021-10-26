@@ -27,6 +27,8 @@ class DishList(Screen):
                 #рекомендация
                 try:
                     items_list = json.loads(t.text)
+                    wp_id = items_list["wp_id"]
+
                     items_list_last = items_list["rec"]
 
                     dish = items_list_last[0]

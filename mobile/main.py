@@ -40,7 +40,7 @@ Builder.load_file('ui.kv')
 dishes_list = []
 result_type = 0
 selected_pop = ""
-
+wp_id = 0
 
 
 def toFixed(numObj, digits=2):
@@ -91,6 +91,8 @@ class SettingsList(Screen):
                 
                 if (t.text.isdigit):
                     self.ids.mdl_notify.text = "Авторизация успешна. WP_ID:" + t.text
+                    wp_id = int(t.text)
+
                 else:
                     self.ids.mdl_notify.text = "Неавторизован. WP_ID:" + t.text
 
@@ -196,9 +198,6 @@ class MainApp(MDApp):
         self.user_data = ast.literal_eval(self.config.get(
             'General', 'user_data'))
 
-    def get_application_config(self):
-        return super(MainApp, self).get_application_config(
-            'inppk.ini'.format(self.directory))
 
     def build(self):
         self.root = Factory.MenuScreen()
