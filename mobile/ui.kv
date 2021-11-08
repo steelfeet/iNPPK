@@ -154,25 +154,1724 @@
 
         Widget:    
 
-#:include force settings.kv
-
-#:include force result_list.kv
-#:include force add_result.kv
-
-#:include force ui/read/read_list.kv
-
-#:include force ui/vacancies/vacancies.kv
-
-#:include force ui/action/pop_actions_list.kv
-#:include force ui/action/action_list.kv
 
 
-#:include force ui/dish/dish_list.kv
-#:include force ui/dish/photo_food-present.kv
-#:include force ui/dish/photo_food_imuri.kv
-#:include force ui/dish/photo_food_camera.kv
-#:include force ui/dish/photo_food-rec.kv
-#:include force ui/dish/dish_list2.kv
+<DishList>:
+    name: "dish_list"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Питание - iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            md_bg_color: rgba("#5C96E0")
+            height: dp(30)
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Рекомендуем *"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#6D7CD6")
+            
+           
+        
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}           
+            md_bg_color: rgba("#5C96E0")
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_reccom_0
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_reccom_0
+                        font_size: 20                   
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_reccom_1
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_reccom_1
+                        font_size: 20                   
+                                       
+
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_reccom_2
+                    #source:"ui/dish/dish6.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_reccom_2
+                        font_size: 20                   
+
+                                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #Список сьеденного
+        MDFillRoundFlatButton:
+            text: "Последние 3 блюда"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_0
+                    #source:"ui/dish/dish1.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_0
+                        #text:"Салат овощной с сыром"
+                        font_size: 20
+                    
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_1
+                    #source:"ui/dish/dish2.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_1
+                        #text:"Креветки вареные"
+                        font_size: 20
+
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: image_2
+                    #source:"ui/dish/dish5.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_2
+                        #text:"Сырный суп"
+                        font_size: 20
+
+            
+           
+        MDFillRoundFlatButton:
+            #презентационный вариант, с фотографией
+            #on_press: app.screen_manager.current = 'photo_food-present'
+            #реальный продакт, с камерой
+            #on_press: app.screen_manager.current = 'photo_food'
+            #вариант для видео, с вводом ссылки на картинку
+            #on_press: app.screen_manager.current = 'photo_food_s1_imuri'
+                
+            #показываем или камеру или поля для ссылки
+            on_press: root.select_prod()
+
+            text: "Фото"
+            font_size: 20            
+            text_color: rgba("#000000")
+            md_bg_color: rgba("#E0C858")
+            size_hint_y: None
+            pos_hint: {"center_x": .5}
+            height: dp(40)
+            
+       
+  
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'result_list'
+            text: " Результат >"
+            font_size: 20
+            md_bg_color: rgba("#97CF70")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+        
+    
+
+
+        Widget:    
+
+
+
+
+
+
+<PhotoFoodCamera>:
+    name: "photo_food_camera"
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        size: root.size
+
+        MDToolbar:
+            title: "Фото блюда"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: app.theme_cls.primary_color
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+
+        #https://kivy.org/doc/stable/examples/gen__camera__main__py.html
+        CameraClick:
+            orientation: 'vertical'
+            padding: 5
+            spacing: 5
+
+            Camera:
+                id: camera
+                resolution: (640, 480)
+                play: False
+            
+            MDFillRoundFlatButton:
+                text: 'Включить камеру'
+                
+                on_press: camera.play = not camera.play
+                font_size: 20
+                
+                eight: dp(40)
+                size_hint_x: 1.0
+                md_bg_color: rgba("#97CF70")
+                
+
+            MDFillRoundFlatButton:
+                text: 'Сфотографировать блюдо'
+                
+                on_press: root.capture()
+                font_size: 20
+                
+                size_hint_x: 1.0
+                size_hint_y: None
+                height: dp(40)
+                pos_hint: {"center_x": .5}
+                md_bg_color: rgba("#E0C858")
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:    
+
+
+
+
+
+
+<ActionList>:
+    name: "action_list"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "События - iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: rgba("#5C96E0")
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+        
+        
+        
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Рекомендуем *"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#6D7CD6")
+
+        MDFillRoundFlatButton:
+            id: title_reccom_0
+            text: " "
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+        MDFillRoundFlatButton:
+            id: title_reccom_1
+            text: " "
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+        MDFillRoundFlatButton:
+            id: title_reccom_2
+            text: " "
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+        
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'pop_actions_list'
+            text: "< Выбрать из Популярных >"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}                 
+
+
+        MDTextField:
+            id: action_text
+            hint_text: "Введите название события"
+            helper_text: ""
+            helper_text_mode: "on_focus"
+            size_hint_x: 0.9
+            font_size: 20
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            mode: "rectangle"
+
+        
+               
+        MDFillRoundFlatButton:
+            on_press: root.add_action()
+            text: "Добавить"
+            font_size: 20
+            md_bg_color: rgba("#97CF70")
+            text_color: rgba("#FFFFEB")
+            size_hint_y: None
+            pos_hint: {"center_x": .5}
+            height: dp(40) 
+            
+
+
+        #Список результатов
+        MDFillRoundFlatButton:
+            text: "Последние события"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        MDFillRoundFlatButton:
+            id: title_1
+            text: "9 Apr 18:17 - Делаю ДЗ"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+        MDFillRoundFlatButton:
+            id: title_2
+            text: "8 Apr 18:27 - Делаю ДЗ"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+        MDFillRoundFlatButton:
+            id: title_3
+            text: "7 Apr 18:31 - Делаю ДЗ"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'result_list'
+            text: " Результат >"
+            font_size: 20
+            md_bg_color: rgba("#97CF70")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+    
+
+
+        Widget:    
+
+
+
+
+
+
+
+
+
+<PopActionsList>:
+    name: "pop_actions_list"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Популярные События - iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            md_bg_color: rgba("#5C96E0")
+            height: dp(30)       
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+        
+        
+        
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Популярные События"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#6D7CD6")
+
+        MDFillRoundFlatButton:
+            on_press: root.add_pop(0)
+            id: title_0
+            text: " "
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+        MDFillRoundFlatButton:
+            on_press: root.add_pop(1)
+            id: title_1
+            text: " "
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+        MDFillRoundFlatButton:
+            on_press: root.add_pop(2)
+            id: title_2
+            text: " "
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+        MDFillRoundFlatButton:
+            on_press: root.add_pop(3)
+            id: title_3
+            text: " "
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+        MDFillRoundFlatButton:
+            on_press: root.add_pop(4)
+            id: title_4
+            text: " "
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(30)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'action_list'
+            text: "< Назад к Событиям"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "<< Назад в главное меню"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            
+
+    
+
+
+        Widget:    
+
+
+
+
+
+
+
+
+
+<ReadList>:
+    name: "read_list"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Читаю - iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: rgba("#5C96E0")
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+        #Список результатов
+        MDFillRoundFlatButton:
+            text: "Лучшие 5 ссылок"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+            on_press: root.reload()
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(0)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.like_read(0)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_0
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_read(0)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(1)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.like_read(1)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_1
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_read(1)          
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(2)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_read(2)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_2
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_read(2)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(3)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_read(3)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_3
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_read(3)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(4)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_read(4)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_4
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)                                                            
+                    on_press: root.dislike_read(4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        MDFillRoundFlatButton:
+            text: "Последние 5 ссылок"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(5)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.like_read(5)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_5
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_read(5)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(6)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.like_read(6)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_6
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_read(6)          
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(7)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_read(7)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_7
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_read(7)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(8)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_read(8)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_8
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_read(8)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(9)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_read(9)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_9
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)                                                            
+                    on_press: root.dislike_read(9)
+
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+        
+
+
+        Widget:    
+
+
+
+
+
+
+
+
+
+<VacanciesList>:
+    name: "vacancies_list"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Вакансии - iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: rgba("#5C96E0")
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+
+
+
+        #Список результатов
+        MDFillRoundFlatButton:
+            text: "Рекомендуемые вакансии"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+            on_press: root.reload()
+
+        
+        MDFillRoundFlatButton:
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            on_press: root.go_href(0)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.like_vacancy(0)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_0
+                        halign: 'center'
+                        
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(0)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(1)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(1)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_1
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(1)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(2)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(2)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_2
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(2)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(3)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(3)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_3
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(3)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(4)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(4)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_4
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)                                                            
+                    on_press: root.dislike_vacancy(4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        MDFillRoundFlatButton:
+            text: "Последние вакансии"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        
+        MDFillRoundFlatButton:
+            on_press: root.go_href(5)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.like_vacancy(5)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_5
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(5)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(6)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(6)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_6
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(6)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(7)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(7)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_7
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(7)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(8)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(8)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_8
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)
+                    on_press: root.dislike_vacancy(8)
+
+
+        MDFillRoundFlatButton:
+            on_press: root.go_href(9)
+            size_hint_y: None
+            size_hint_x: 1.0
+            height: dp(40)
+            md_bg_color: rgba("#5C96E0")
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint_x: 1.0
+                ImageButton:
+                    source: "ui/vacancies/like-white-25.png"
+                    allow_stretch: True
+                    size_hint_x: 0.15
+                    height: dp(38)
+                    on_press: root.like_vacancy(9)
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_x: 0.7
+                    Label:
+                        id: title_9
+                        halign: 'center'
+                ImageButton:
+                    size_hint_x: 0.15
+                    source: "ui/vacancies/dislike-25.png"
+                    allow_stretch: True
+                    height: dp(38)                                                            
+                    on_press: root.dislike_vacancy(9)
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:    
+
+
+
+
+
+
+
+
+
+<ResultList>:
+    name: "result_list"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "iNPPK"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: rgba("#5C96E0")
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+        #Список результатов
+
+
+
+
+
+
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Результат за сутки"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#6D7CD6")
+
+        MDFillRoundFlatButton:
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(50)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 5
+
+                MDBoxLayout:
+                    padding: 5
+                    size_hint_x: 0.3
+                MDFillRoundFlatButton:
+                    on_press: root.add_result(1)
+                    text: "Ум"
+                    font_size: 20
+                    text_color: rgba("#000000")
+                    size_hint_y: None
+                    height: dp(40)
+                    md_bg_color: rgba("#E0C858")
+
+                MDBoxLayout:
+                    padding: 5
+                    size_hint_x: 0.3
+                MDFillRoundFlatButton:
+                    on_press: root.add_result(2)
+                    text: "Эмоции"
+                    font_size: 20
+                    text_color: rgba("#000000")
+                    size_hint_y: None
+                    height: dp(40)
+                    md_bg_color: rgba("#BE82FF")
+
+                MDBoxLayout:
+                    padding: 5
+                    size_hint_x: 0.3
+                MDFillRoundFlatButton:
+                    on_press: root.add_result(3)
+                    text: "Здоровье"
+                    font_size: 20
+                    text_color: rgba("#000000")
+                    md_bg_color: rgba("#E0C858")
+                    size_hint_y: None
+                    height: dp(40)
+                    md_bg_color: rgba("#97CF70")
+
+
+
+        MDFillRoundFlatButton:
+            font_size: 20
+            text: "Результат за неделю"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#6D7CD6")
+
+        Image:
+            source: "daily-graph.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+
+
+
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+          
+
+
+        Widget:    
+
+
+
+
+<SettingsList>:
+    name: "settings_list"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Настройки"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: rgba("#5C96E0")
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+        MDFillRoundFlatButton:
+            id: mdl_notify
+            text: ""
+            font_size: 20
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#FFFFFF")
+            text_color: rgba("#97CF70")
+            
+
+
+
+        MDTextField:
+            id: tm_id
+            hint_text: "TM ID"
+            helper_text: ""
+            helper_text_mode: "on_focus"
+            size_hint_x: 0.9
+            font_size: 20
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            mode: "rectangle"
+
+
+        MDTextField:
+            id: vk_id
+            hint_text: "VK ID"
+            helper_text: ""
+            helper_text_mode: "on_focus"
+            size_hint_x: 0.9
+            font_size: 20
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            mode: "rectangle"
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            padding: 3
+            MDCheckbox:
+                id : is_model            
+            MDLabel:
+                text: "Модель #1"
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            padding: 3
+            MDCheckbox:
+                id : is_prod  
+            MDLabel:
+                text: "Режим разработки"
+
+
+
+
+        Widget:
+        
+        MDFillRoundFlatButton:
+            on_press: root.save_settings()
+            font_size: 20
+            text: "Ok"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
+            
+
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: rgba("#6D7CD6")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:            
 
 
 

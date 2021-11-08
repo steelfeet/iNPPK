@@ -6,7 +6,7 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,ttf,json
 version = 0.3.5
 #requirements = kivy==master,python3crystax==3.5
-requirements = python3,kivy,requests,kivymd,opencv-python,urllib3
+requirements = python3,kivy,requests,kivymd,opencv-python,urllib3,charset-normalizer,idna,Pillow
 orientation = all
 osx.python_version = 3
 osx.kivy_version = 2.0.0
