@@ -1,0 +1,374 @@
+--------- 09Nov21
+mobile: v.0.3.6 [build 0043]
+правильная загрузка ActionList, режим разработчика - ввод URI, а не камера; т.к. камера уже работает стабильно
+
+
+--------- 08Nov21
+buildozer spec 0.2
+
+mobile: v.0.3.6 [build 0042]
+файлы из /ui объединены в один
+
+
+--------- 26Oct21
+mobile: v.0.3.5 [build 0041]
+дизайн от Лизы #2
+
+mobile: v.0.3.5 [build 0042]
+https://habr.com/ru/post/426269/
+
+buildozer spec 0.1
+cd Project
+git clone https://github.com/steelfeet/iNPPK.git
+cd /home/kivy/Project/iNPPK/mobile
+buildozer android debug
+https://www.libsdl.org/ - недоступен из НППК
+https://vk.com/@stulovblog-tor-as-proxy-windows
+https://dist.torproject.org/torbrowser/10.5.10/
+tor-win64-0.4.5.10
+https://www.softpedia.com/get/Security/Security-Related/Tor.shtml - архив отличается
+https://socproxy.ru/proksi-dlya-windows
+
+Tor on Ubuntu
+https://askubuntu.com/questions/6522/how-to-install-tor
+https://askubuntu.com/questions/324685/how-to-route-all-internet-traffic-through-tor-the-onion-router
+/etc/tor/torrc
+
+sudo apt install libc6-dev
+pip3 install --upgrade Cython
+
+The VM comes pre-installed with for:
+android.sdk = 28
+android.api = 19 or android.api = 27
+---------- заработало, но с ошибкой
+
+apt install libssl-dev
+buildozer android clean
+buildozer android debug
+
+Could not find a version that satisfies the requirement ast, functools
+
+pip install picamera "buildozer"
+---\
+под *nix не надо?
+
+
+
+Не запускается на телефоне
+рабочая ВМ: D:\kivy-vm\kivy-vm\kivy-vm.vbox
+VS Code
+https://ip-calculator.ru/blog/ask/kak-ustanovit-visual-studio-code-v-linux/
+sudo snap install --classic code
+sudo apt-get install libjpeg-dev zlib1g-dev
+sudo apt-get install libavdevice-dev
+pip3 install kivymd
+pip3 install opencv-python
+
+buildozer android clean
+buildozer android debug
+
+adb install /home/kivy/Project/iNPPK/mobile/bin/iNPPK-0.3.5-armeabi-v7a-debug.apk
+
+Failed to install PACKAGE.NAME.apk: Failure [INSTALL_FAILED_NO_MATCHING_ABIS: Failed to extract native libraries, res=-113]
+https://www.linuxuprising.com/2018/07/anbox-how-to-install-google-play-store.html
+https://github.com/geeks-r-us/anbox-playstore-installer/
+
+adb: failed to install /home/kivy/Project/iNPPK/mobile/bin/iNPPK-0.3.5-armeabi-v7a-debug.apk: 
+Failure [INSTALL_FAILED_OLDER_SDK: Failed parse during installPackageLI: /data/app/vmdl1896004959.tmp/base.apk (at Binary XML file line #11): 
+Requires newer sdk version #27 (current version is #25)]
+
+adb uninstall /home/kivy/Project/iNPPK/mobile/bin/iNPPK-0.3.5-armeabi-v7a-debug.apk
+
+под #25 не собирается
+
+клон - kivy-vm-28Oct21-vscode
+
+
+adb install /home/kivy/Projects/iNPPK/mobile/bin/iNPPK-0.3.5-armeabi-v7a-debug.apk
+buildozer android logcat
+
+adb uninstall /home/kivy/Projects/iNPPK/mobile/bin/iNPPK-0.3.5-armeabi-v7a-debug.apk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+Из Linux
+https://xakep.ru/2017/04/18/anbox/
+https://losst.ru/zapusk-android-prilozhenij-na-linux
+
+adb kill-server
+
+sudo adb install /home/kivy/Project/iNPPK/mobile/bin/iNPPK-0.3.5-armeabi-v7a-debug.apk
+
+adb install -r /home/kivy/Project/iNPPK/mobile/bin/iNPPK-0.3.5-armeabi-v7a-debug.apk
+
+
+После сбоя vbox папка Project недоступна
+----
+cd /home/kivy/Projects/
+
+
+
+
+
+
+
+
+
+
+
+
+--------- 25Oct21
+mobile: v.0.3.4 [build 0036]
+проверка наличия данных для авторизации
+
+mobile: v.0.3.4 [build 0037]
+проверка регистрации на сайте
+
+mobile: v.0.3.5 [build 0038]
+переход по ссылке
+
+mobile: v.0.3.5 [build 0039]
+---
+исправлена ошибка от [build 0029] - работа с прочитанными упрощена, по обновлению меняем статусы просто у всех, а не передаем список просмотренных 
+и меняем только у них
+
+mobile: v.0.3.5 [build 0040]
+удаление фотографии
+
+
+--------- 23Oct21
+mobile: v.0.3.4 [build 0034] - дизайн от Лизы
+mobile: v.0.3.4 [build 0035] - фикс "Warning, too much iteration done before the next frame"
+
+
+--------- 22Oct21
+mobile: v.0.3.4 [build 0033]
+dish полностью
+php_app: v.0.2.8 [build 0030]
+dish полностью
+
+--------- 21Oct21
+mobile: v.0.3.3 [build 0032]
+actions полностью
+backend actions делаем на PHP, т.к. нет работы с SQLite, и нет ДС/МЛ
+php_app: v.0.2.7 [build 0029]
+actions полностью
+
+--------- 19Oct21
+mobile: v.0.3.2 [build 0030]
+студенты: доработки интерфейсов
+mobile: v.0.3.2 [build 0031]
+убрана ошибка "Clock...
+
+--------- 18Oct21
+mobile: v.0.3.1 [build 0028]
+окончательный вариант показа вакансий
+php_app: v.0.2.6 [build 0028]
+структура code / action
+
+mobile: v.0.3.2 [build 0029]
+read аналогичен вакансиям
+----
+иногда показываются просмотренные ссылки
+php_app: v.0.2.7 [build 0029]
+like/dislike read
+
+
+
+--------- 16Oct21
+mobile: v.0.3.1 [build 0027]
+неверная логика: show_vakancy используется и для определения показанных вакансий (для их непоказа) и для
+подстчета статистики слов. Надо возвращаться к структуре code / action
+
+
+--------- 15Oct21
+mobile: v.0.3.0 [build 0026]
+при обновлении весов слов из ВСЕХ показанных вакансий, то обучение происходит медленно и неточно:
+лучше всего обновляются веса распространенных слов
+-> поэтому добавляем кнопки изменения весов для КАЖДОЙ вакансии
+
+вывод заголовка вакансии в правильной кодировке в wsgi и в терминале мобильного
+
+
+--------- 12Oct21
+mobile: v.0.2.4 [build 0025]
+кнопка "Результаты" в каждой activity
+
+
+--------- 11Oct21
+php_app: v.0.2.5 [build 0027]
+для каждой активности свой подход к обновлению весов
+show_vacancies - обновляем веса последних показанных
+
+
+--------- 09Oct21
+php_app: v.0.2.4 [build 0024]
+поле hour в БД логирования
+
+mobile: v.0.2.4 [build 0024]
+доработки интерфейса под концепцию №2
+
+python_app: v.0.2.4 [build 0024]
+добавление показанных вакансий в лог (data_1=>vacancy_id)
+
+php_app: v.0.2.4 [build 0025]
+неправильное определение wp_id при наличии пустого vk_id
+
+php_app: v.0.2.4 [build 0026]
+правильная временная зона
+
+
+
+--------- 06Oct21
+v. 0.1.2 [build 0021]
+steelfeet.ru: работа с сайтом для авторов (чтобы добавлять фотографии)
+--- не работает: https://qna.habr.com/q/1057604
+v. 0.1.2 [build 0022]
+admin-ru_RU.po
+#: wp-admin/includes/ajax-actions.php:2513
+msgid "Sorry, you are not allowed to attach files to this post."
+msgstr "Извините, Вам не разрешено делать вложения файлов к этой записи."
+https://stackoverflow.com/questions/31885086/error-you-dont-have-permission-to-attach-files-to-this-post-on-wordpress
+
+
+--------- 25Sep21
+v. 0.2.3 [build 0022]
+mobile: полноценная работа с камерой
+app: распознавание по фотографии
+
+v. 0.2.3 [build 0023]
+mobile: убраны часы - выскакивали косяки, даже без их включения
+
+
+--------- 25Sep21
+v. 0.2.2 [build 0021]
+выбор в настройках подключения реальной камеры или ввода ссылки на картинку
+разбиение заголовков читательского дневника на строки
+
+
+--------- 24Sep21
+pip install opencv-python
+set READTHEDOCS=True
+pip install picamera
+
+
+--------- 22Sep21
+v. 0.2.2 [build 0020]
+парсер habr
+вывод 5 последних ссылок
+
+
+--------- 16Sep21
+mobile v. 0.2.1 [build 0019]
+вывод 5 вакансий
+app / vacancies - from urllib.parse import unquote для преобразования спецсимволов
+
+
+--------- 14Sep21
+inppk_app v.0.1.1 [build 0021]
+замена спецсимвола в запросе
+
+pip install requests
+
+app / vacancies v.0.1.0 [build 0001]
+вывод последних 5 вакансий, формат вывода: сложный json с логом запроса
+https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/mobile_vacancies.wsgi?q={"action":"show_vacancy","tm_id":"@pa5ht"}
+https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/mobile_vacancies.wsgi?q={"action": "show_vacancy", "tm_id": "@pa5ht", 
+"vk_id": ""}
+
+--------- 09Sep21
+inppk_app v.0.1.1 [build 0020]
+WP_ID по внешним сервисам
+https://steelfeet.ru/app/get.php?q={"action":"show_wp_id","tm_id":"@pa5ht"}
+
+
+--------- 08Sep21
+mobile:
+v. 0.2.1 [build 0018]
+открытие файлов активити в правильной кодировке
+
+v. 0.2.1 [build 0017]
+т.к. не успеваем сделать все, на что замахнулись, то оставляем только самые проработанные части:
+Дневник питания
+Дневник событий
+Читательский дневник
+Вакансии
+
+интерфейс и классы перенесены в соответствующие папки в /ui
+
+mobile_08Sep21.zip - полная версия для первой презентации
+
+
+--------- 03Aug21
+
+новый Git в папке Z:\Dropbox\www\steelfeet.ru\wp-content
+
+объединяем БД для метатестирования и БД мобильного приложения: все действия студента не сразу заносятся в метаполя ВП, а логируются в БД из мобильного
+по крону метаполя обновляются и выводятся в теме
+
+
+
+08Apr21
+для демонстрации работы системы рекомендаций для видео, используем моделирование ситуации:
+заполняем таблицы сгенерированными данными и обращаемся с запросами к тестовым АПИ
+
+https://steelfeet.ru/app/reccom_1.php
+
+
+Case #1
+Дневник питания:
+Если утром на завтрак яичница => средний балл результата < 5, 2-4
+Если утром на завтрак овсянка => средний балл результата > 5, 6-8
+
+Яичница
+https://steelfeet.ru/app/dish_rec.php?imageUri=https://www.gastronom.ru/binfiles/images/20150610/b9f64766.jpg
+"title":"Яичница-глазунья"
+"id":6477
+
+Овсянка
+https://steelfeet.ru/app/dish_rec.php?imageUri=https://scientificrussia.ru/data/auto/material/large-preview-ovsyan.jpg
+"title":"Овсяная каша с изюмом"
+"id":7328
+
+https://steelfeet.ru/app/build_model_1.php
+
+
+Рекомендации продуктов по этой модели
+https://steelfeet.ru/app/reccom_1.php
+
+
+25Jan21
+начинаем делать админку на выбранной:
+https://github.com/ColorlibHQ/gentelella

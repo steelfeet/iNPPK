@@ -111,8 +111,9 @@ def application(env, start_response):
     get_wp_url = "https://steelfeet.ru/app/get.php?q=" + params_json
     out_s["get_wp_url"] = get_wp_url
 
-    response = requests.get(get_wp_url)
-    wp_id = int(response.text)
+    #response = requests.get(get_wp_url)
+    #wp_id = int(response.text)
+    wp_id = 2
     out_s["wp_id"] = wp_id
 
     now = datetime.datetime.now()

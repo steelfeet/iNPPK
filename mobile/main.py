@@ -52,6 +52,25 @@ def toFixed(numObj, digits=2):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class SettingsList(Screen):
     _app = ObjectProperty()
     def on_enter(self):
@@ -119,84 +138,106 @@ class SettingsList(Screen):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #загружаем activity "Дневник питания"
 basedir = os.path.abspath(os.path.dirname(__file__))
 #exec(open(os.path.join(basedir, "ui/dish/dish_list.py"), "rt", encoding="utf-8").read())
 class DishList(Screen):
     _app = ObjectProperty()
     def on_enter(self):
-        try:
-            if (len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1):
-                self._app.screen_manager.current = 'settings_list'
+        if (len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1):
+            self._app.screen_manager.current = 'settings_list'
+        else:
+            db_request = {}
+            db_request['code'] = 'dish'
+            db_request['action'] = 'last'
+            db_request['tm_id'] = self._app.user_data["tm_id"]
+            db_request['vk_id'] = self._app.user_data["vk_id"]
+            headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
+            db_json = json.dumps(db_request)
+            if (self._app.user_data["is_model"]):
+                page_url = "https://steelfeet.ru/app/get_1.php?q=" + db_json
             else:
-                db_request = {}
-                db_request['code'] = 'dish'
-                db_request['action'] = 'last'
-                db_request['tm_id'] = self._app.user_data["tm_id"]
-                db_request['vk_id'] = self._app.user_data["vk_id"]
-                headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
-                db_json = json.dumps(db_request)
-                if (self._app.user_data["is_model"]):
-                    page_url = "https://steelfeet.ru/app/get_1.php?q=" + db_json
-                else:
-                    page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
-                print("запрос последних: " + page_url)
-                t = requests.get(page_url, headers = headers)
+                page_url = "https://steelfeet.ru/app/get.php?q=" + db_json
+            print("запрос последних: " + page_url)
+            t = requests.get(page_url, headers = headers)
 
 
-                #рекомендация
-                try:
-                    items_list = json.loads(t.text)
-                    wp_id = items_list["wp_id"]
-
-                    items_list_last = items_list["rec"]
-
-                    dish = items_list_last[0]
-                    source = str(dish['image_uri']).replace("\\", "")
-                    self.ids.image_reccom_0.source = source
-                    self.ids.title_reccom_0.text = dish['title'][:21]
-
-                    dish = items_list_last[1]
-                    source = str(dish['image_uri']).replace("\\", "")
-                    self.ids.image_reccom_1.source = source
-                    self.ids.title_reccom_1.text = dish['title'][:21]
-
-                    dish = items_list_last[2]
-                    source = str(dish['image_uri']).replace("\\", "")
-                    self.ids.image_reccom_2.source = source
-                    self.ids.title_reccom_2.text = dish['title'][:21]
-
-                except Exception as e:
-                    print(traceback.format_exc())
-
-
-
-
-            #последние
+            #рекомендация
             try:
                 items_list = json.loads(t.text)
-                items_list_last = items_list["last"]
+                wp_id = items_list["wp_id"]
+
+                items_list_last = items_list["rec"]
 
                 dish = items_list_last[0]
                 source = str(dish['image_uri']).replace("\\", "")
-                self.ids.image_0.source = source
-                self.ids.title_0.text = dish['title'][:21]
+                self.ids.image_reccom_0.source = source
+                self.ids.title_reccom_0.text = dish['title'][:21]
 
                 dish = items_list_last[1]
                 source = str(dish['image_uri']).replace("\\", "")
-                self.ids.image_1.source = source
-                self.ids.title_1.text = dish['title'][:21]
+                self.ids.image_reccom_1.source = source
+                self.ids.title_reccom_1.text = dish['title'][:21]
 
                 dish = items_list_last[2]
                 source = str(dish['image_uri']).replace("\\", "")
-                self.ids.image_2.source = source
-                self.ids.title_2.text = dish['title'][:21]
+                self.ids.image_reccom_2.source = source
+                self.ids.title_reccom_2.text = dish['title'][:21]
 
             except Exception as e:
                 print(traceback.format_exc())
 
-        except:
-            self._app.screen_manager.current = 'settings_list'
+
+
+
+        #последние
+        try:
+            items_list = json.loads(t.text)
+            items_list_last = items_list["last"]
+
+            dish = items_list_last[0]
+            source = str(dish['image_uri']).replace("\\", "")
+            self.ids.image_0.source = source
+            self.ids.title_0.text = dish['title'][:21]
+
+            dish = items_list_last[1]
+            source = str(dish['image_uri']).replace("\\", "")
+            self.ids.image_1.source = source
+            self.ids.title_1.text = dish['title'][:21]
+
+            dish = items_list_last[2]
+            source = str(dish['image_uri']).replace("\\", "")
+            self.ids.image_2.source = source
+            self.ids.title_2.text = dish['title'][:21]
+
+        except Exception as e:
+            print(traceback.format_exc())
+
 
 
 
@@ -207,9 +248,9 @@ class DishList(Screen):
     #выбираем показ камеры или текстового поля для ввода ссылки на картинку
     def select_prod(self):
         if (self._app.user_data["is_prod"]):
-            self._app.screen_manager.current = 'photo_food_camera'
-        else:
             self._app.screen_manager.current = 'photo_food_imuri'
+        else:
+            self._app.screen_manager.current = 'photo_food_camera'
 
 
 
@@ -361,6 +402,27 @@ class PhotoFoodCamera(Screen):
         except:
             pass
         MainApp.get_running_app().screen_manager.current = 'photo_food_rec'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -544,134 +606,131 @@ class ReadList(Screen):
         self.on_enter()    
     
     def on_enter(self):
-        try:
-            if (len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1):
-                self._app.screen_manager.current = 'settings_list'
-            else:
-                db_request = {}
-                db_request['code'] = 'read'
-                db_request['action'] = 'show'
-                db_request['tm_id'] = self._app.user_data["tm_id"]
-                db_request['vk_id'] = self._app.user_data["vk_id"]
-                headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
-                db_json = json.dumps(db_request)
-                
-                page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/best_read.wsgi?q=" + str(db_json)
-                t = requests.get(page_url, headers = headers)
+        if (len(self._app.user_data["tm_id"]) < 1) and (len(self._app.user_data["vk_id"]) < 1):
+            self._app.screen_manager.current = 'settings_list'
+        else:
+            db_request = {}
+            db_request['code'] = 'read'
+            db_request['action'] = 'show'
+            db_request['tm_id'] = self._app.user_data["tm_id"]
+            db_request['vk_id'] = self._app.user_data["vk_id"]
+            headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:45.0) Gecko/20100101 Firefox/45.0'}
+            db_json = json.dumps(db_request)
+            
+            page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/best_read.wsgi?q=" + str(db_json)
+            t = requests.get(page_url, headers = headers)
 
-                try:
-                    items_list = json.loads(t.text)
-                    links = items_list["reads"]
-                    print()
-                    print(items_list["words"])
-
-                except:
-                    print(t.text)
-                
-                #разбиваем title на две строчки
-                n = 0
-                good_titles = []   
-                for item in links:
-                    words = item["title"].split(" ")
-
-
-                    good_title = ""
-                    next_br = True
-                    for word in words:
-                        good_title = good_title + word + " "
-                        if len(good_title) > 50:
-                            break
-                        if (len(good_title) > 25):
-                            if (next_br):
-                                good_title = good_title + "\n"
-                                next_br = False
-                                
-
-
-                                
-                                
-                    
-                    good_titles.append(good_title)
-                    titles_id[n] = item["id"]
-                    items_hrefs[n] = item["href"]
-                    n = n + 1
-                
-                #выводим на активити
-                self.ids.title_0.text = good_titles[0]
-                #self.ids.href_0.text = links[0]["href"]
-
-                self.ids.title_1.text = good_titles[1]
-                #self.ids.href_1.text = links[1]["href"]
-
-                self.ids.title_2.text = good_titles[2]
-                #self.ids.href_2.text = links[2]["href"]
-
-                self.ids.title_3.text = good_titles[3]
-                #self.ids.href_3.text = links[3]["href"]
-
-                self.ids.title_4.text = good_titles[4]
-                #self.ids.href_4.text = links[4]["href"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/last_read.wsgi?q=" + str(db_json)
-                t = requests.get(page_url, headers = headers)
-
+            try:
                 items_list = json.loads(t.text)
                 links = items_list["reads"]
+                print()
+                print(items_list["words"])
+
+            except:
+                print(t.text)
+            
+            #разбиваем title на две строчки
+            n = 0
+            good_titles = []   
+            for item in links:
+                words = item["title"].split(" ")
+
+
+                good_title = ""
+                next_br = True
+                for word in words:
+                    good_title = good_title + word + " "
+                    if len(good_title) > 50:
+                        break
+                    if (len(good_title) > 25):
+                        if (next_br):
+                            good_title = good_title + "\n"
+                            next_br = False
+                            
+
+
+                            
+                            
                 
+                good_titles.append(good_title)
+                titles_id[n] = item["id"]
+                items_hrefs[n] = item["href"]
+                n = n + 1
+            
+            #выводим на активити
+            self.ids.title_0.text = good_titles[0]
+            #self.ids.href_0.text = links[0]["href"]
+
+            self.ids.title_1.text = good_titles[1]
+            #self.ids.href_1.text = links[1]["href"]
+
+            self.ids.title_2.text = good_titles[2]
+            #self.ids.href_2.text = links[2]["href"]
+
+            self.ids.title_3.text = good_titles[3]
+            #self.ids.href_3.text = links[3]["href"]
+
+            self.ids.title_4.text = good_titles[4]
+            #self.ids.href_4.text = links[4]["href"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/last_read.wsgi?q=" + str(db_json)
+            t = requests.get(page_url, headers = headers)
+
+            items_list = json.loads(t.text)
+            links = items_list["reads"]
+            
+            
+            #разбиваем title на две строчки
+            for item in links:
+                words = item["title"].split(" ")
+
+                good_title = ""
+                next_br = True
+                for word in words:
+                    good_title = good_title + word + " "
+                    if len(good_title) > 50:
+                        break
+                    if (len(good_title) > 25):
+                        if (next_br):
+                            good_title = good_title + "\n"
+                            next_br = False
+                            
                 
-                #разбиваем title на две строчки
-                for item in links:
-                    words = item["title"].split(" ")
+                good_titles.append(good_title)
+                titles_id[n] = item["id"]
+                items_hrefs[n] = item["href"]
+                n = n + 1
+            
+            #выводим на активити
+            self.ids.title_5.text = good_titles[5]
+            #self.ids.href_0.text = links[0]["href"]
 
-                    good_title = ""
-                    next_br = True
-                    for word in words:
-                        good_title = good_title + word + " "
-                        if len(good_title) > 50:
-                            break
-                        if (len(good_title) > 25):
-                            if (next_br):
-                                good_title = good_title + "\n"
-                                next_br = False
-                                
-                    
-                    good_titles.append(good_title)
-                    titles_id[n] = item["id"]
-                    items_hrefs[n] = item["href"]
-                    n = n + 1
-                
-                #выводим на активити
-                self.ids.title_5.text = good_titles[5]
-                #self.ids.href_0.text = links[0]["href"]
+            self.ids.title_6.text = good_titles[6]
+            #self.ids.href_1.text = links[1]["href"]
 
-                self.ids.title_6.text = good_titles[6]
-                #self.ids.href_1.text = links[1]["href"]
+            self.ids.title_7.text = good_titles[7]
+            #self.ids.href_2.text = links[2]["href"]
 
-                self.ids.title_7.text = good_titles[7]
-                #self.ids.href_2.text = links[2]["href"]
+            self.ids.title_8.text = good_titles[8]
+            #self.ids.href_3.text = links[3]["href"]
 
-                self.ids.title_8.text = good_titles[8]
-                #self.ids.href_3.text = links[3]["href"]
+            self.ids.title_9.text = good_titles[9]
+            #self.ids.href_4.text = links[4]["href"]
 
-                self.ids.title_9.text = good_titles[9]
-                #self.ids.href_4.text = links[4]["href"]
-
-        except:
-            self._app.screen_manager.current = 'settings_list'
 
 
 
@@ -767,6 +826,7 @@ class VacanciesList(Screen):
         
         #отдельный бекенд для вакансий, т.к. он на Python для поиска подходящих вакансий
         page_url = "https://studs.steelfeet.ru/_hack/2020-21/world-it-planet/847-hh-scrapper/best_vacancies.wsgi?q=" + str(db_json)
+        print("page_url:" + page_url)
         t = requests.get(page_url, headers = headers)
 
         items_list = json.loads(t.text)

@@ -13,7 +13,7 @@
         id: photo_food
     #вариант для видео с эмулятором
     PhotoFoodUri:
-        id: photo_food_s1_imuri
+        id: photo_food_imuri
     #реальная камера
     PhotoFoodCamera:
         id: photo_food_camera
@@ -529,6 +529,99 @@
 
 
         Widget:    
+
+
+
+<PhotoFoodUri>:
+    name: "photo_food_imuri"
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Эмуляция фото"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: app.theme_cls.primary_color
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+
+
+
+        MDTextField:
+            id: photo_emulation
+            hint_text: "Введите URI картинки с блюдом"
+            helper_text: ""
+            helper_text_mode: "on_focus"
+            size_hint_x: 0.9
+            font_size: 20
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            mode: "rectangle"
+
+        MDFillRoundFlatButton:
+            on_press: root.send_uri()
+            text: "Ок!"
+            font_size: 20
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1856,6 +1949,16 @@
             pos_hint: {"center_x": .5}
             md_bg_color: rgba("#5C96E0")
             
+
+        MDFillRoundFlatButton:
+            on_press: root.on_enter()
+            font_size: 20
+            text: "Обновить"
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+            md_bg_color: rgba("#5C96E0")
 
 
 
