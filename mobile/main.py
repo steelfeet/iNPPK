@@ -1017,6 +1017,9 @@ class AddResult(Screen):
 
 
 
+
+
+
 class MainApp(MDApp):
     def __init__(self, **kvargs):
         super(MainApp, self).__init__(**kvargs)
@@ -1051,6 +1054,7 @@ class MainApp(MDApp):
     def on_start(self):
         lbl = self.screen_manager.get_screen("menu").ids.toolbar_clock
         #Clock.schedule_once(partial(crudeclock.update, lbl), -1)
+
 
 if __name__ == '__main__':
     MainApp().run()

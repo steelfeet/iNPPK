@@ -2,6 +2,9 @@
 mobile: v.0.3.6 [build 0043]
 правильная загрузка ActionList, режим разработчика - ввод URI, а не камера; т.к. камера уже работает стабильно
 
+mobile: v.0.3.6 [build 0044]
+перенесен <AddResult> в ui.kv
+
 
 --------- 08Nov21
 buildozer spec 0.2
