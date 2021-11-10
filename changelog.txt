@@ -9,6 +9,10 @@ mobile: v.0.3.6 [build 0043]
 mobile: v.0.3.6 [build 0044]
 перенесен <AddResult> в ui.kv
 
+mobile: v.0.3.6 [build 0045]
+.buildozer 
+
+
 
 --------- 08Nov21
 buildozer spec 0.2
