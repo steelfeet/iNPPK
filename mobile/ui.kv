@@ -309,7 +309,7 @@
         #Список сьеденного
         MDFillRoundFlatButton:
             text: "Последние 3 блюда"
-            font_size: 20
+            font_size: 60
             md_bg_color: rgba("#6D7CD6")
             size_hint_x: 1.0
             size_hint_y: None
@@ -339,8 +339,7 @@
                     padding: 5
                     Label:
                         id: title_0
-                        #text:"Салат овощной с сыром"
-                        font_size: 20
+                        font_size: 60
                     
 
 
@@ -368,7 +367,7 @@
                     Label:
                         id: title_1
                         #text:"Креветки вареные"
-                        font_size: 20
+                        font_size: 40
 
 
         MDFillRoundFlatButton:
@@ -602,6 +601,214 @@
         Widget:    
 
 
+
+
+
+
+
+
+#список распознанных рецептов с выбором
+<PhotoFoodRec>:
+    name: "photo_food_rec"
+    _app: app
+
+    MDBoxLayout:
+        # Add padding and spacing
+        orientation: 'vertical'
+        size_hint_y: None
+        padding: 5
+        spacing: 5
+        size: root.size
+
+        MDToolbar:
+            title: "Распознание"
+            left_action_items: [["menu", lambda x: app.callback()]]
+            #right_action_items: [["dots-vertical", lambda x: app.callback()], ["clock", lambda x: app.callback_2()]]
+            height: dp(30)
+            md_bg_color: app.theme_cls.primary_color
+            font_size: 10
+
+            MDLabel:
+                id: toolbar_clock
+                halign: "right"
+                color: (3.0, 3.0, 3.0, 1.0)
+
+        Image:
+            source: "header.jpg"
+            size_hint_y: None
+            width: self.width
+            allow_stretch: True
+
+
+        #Список сьеденного
+        MDFillRoundFlatButton:
+            text: "Выберите подходящие"
+            font_size: 20
+            md_bg_color: rgba("#4575CA")
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5} 
+
+        MDFillRoundFlatButton:
+            #реальный выбор
+            on_press: root.select_dish(0)
+            #переход на презентационный вариант с макаронами
+            #on_press: app.screen_manager.current = 'dish_list2'
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: rec_im_1
+                    source:"recogn1.jpg"
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_1
+                        text:""
+                        font_size: 40
+
+
+        MDFillRoundFlatButton:
+            on_press: root.select_dish(1)
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: rec_im_2
+                    source:""
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_2
+                        text:""
+                        font_size: 40
+
+
+        MDFillRoundFlatButton:
+            on_press: root.select_dish(2)
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: rec_im_3
+                    source:""
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_3
+                        text:""
+                        font_size: 20
+
+        
+        MDFillRoundFlatButton:
+            on_press: root.select_dish(3)
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: rec_im_4
+                    source:""
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_4
+                        text:""
+                        font_size: 20
+        
+        MDFillRoundFlatButton:
+            on_press: root.select_dish(4)
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(60)
+            pos_hint: {"center_x": .5}
+            
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: 3
+                pos_hint: {"center_x": 0}
+
+                AsyncImage:
+                    id: rec_im_5
+                    source:""
+                    pos_hint: {"center_x": 0.5}
+                    size_hint_x: 0.3
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: 5
+                    Label:
+                        id: title_5
+                        text:""
+                        font_size: 20
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'dish_list'
+            text: "< Дневник питания"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        MDFillRoundFlatButton:
+            on_press: app.screen_manager.current = 'menu'
+            text: "< Назад в главное меню"
+            font_size: 20
+            md_bg_color: app.theme_cls.primary_light
+            size_hint_x: 1.0
+            size_hint_y: None
+            height: dp(40)
+            pos_hint: {"center_x": .5}
+
+
+        Widget:    
 
 
 
