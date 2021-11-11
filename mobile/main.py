@@ -197,17 +197,17 @@ class DishList(Screen):
                 dish = items_list_last[0]
                 source = str(dish['image_uri']).replace("\\", "")
                 self.ids.image_reccom_0.source = source
-                self.ids.title_reccom_0.text = dish['title'][:51]
+                self.ids.title_reccom_0.text = dish['title'][:21]
 
                 dish = items_list_last[1]
                 source = str(dish['image_uri']).replace("\\", "")
                 self.ids.image_reccom_1.source = source
-                self.ids.title_reccom_1.text = dish['title'][:51]
+                self.ids.title_reccom_1.text = dish['title'][:21]
 
                 dish = items_list_last[2]
                 source = str(dish['image_uri']).replace("\\", "")
                 self.ids.image_reccom_2.source = source
-                self.ids.title_reccom_2.text = dish['title'][:51]
+                self.ids.title_reccom_2.text = dish['title'][:21]
 
             except Exception as e:
                 print(traceback.format_exc())
